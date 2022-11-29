@@ -1,0 +1,10 @@
+DirectoryIndex cli_process.php
+RewriteEngine On
+RewriteRule ^$ cli_process.php [QSA,L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ cli_process.php [QSA,L]
+AuthType Basic
+        AuthName "Restricted Content"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user

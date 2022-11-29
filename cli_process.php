@@ -12,7 +12,7 @@
 
 // Just to be sure
 set_time_limit(5);
-date_default_timezone_set('Pacific/Auckland');
+date_default_timezone_set('America/Santo_Domingo');
 
 require_once 'bootstrap.php' ;
 require_once LIB_BASE . 'KLogger.php';

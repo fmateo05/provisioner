@@ -46,6 +46,7 @@ P34 = {{ line.auth_password }}
 # Name
 # String
 P3 = {{ line.display_name }}
+# P103 = 2
 
 # Voice Mail Access Number
 # String
@@ -57,7 +58,7 @@ P33 =
 # DNS Mode. 0 - A Record, 1 - SRV, 2 - NAPTR/SRV, 3 - Use Configured IP. Default is 0
 # Number: 0, 1, 2, 3
 # Mandatory
-P103 = 0
+P103 = 2
 
 # DNS SRV Fail-over Mode. 0 - Default, 1 - Saved one until DNS TTL, 2 - Saved one until no response. Default is 0
 # Number: 0,1,2
@@ -158,7 +159,7 @@ P250 = 400
 # SIP Transport. 0 - UDP, 1 - TCP, 2 - TLS/TCP. Default is 0
 # Number: 0, 1, 2
 # Mandatory
-P130 = 0
+P130 = 2
 
 # SIP Listening Mode. 
 # 0 - Transport Only, 1 - Dual, 2 - Dual (BLF Enforced), 3 - Dual (Secured). Default is 0
@@ -920,7 +921,7 @@ P411 = 0
 # Register Expiration (in minutes). Default is 60. Max is 45 days
 # Number: 1 - 64800
 # Mandatory
-P412 = 60
+P412 = 3
 
 # Subscribe Expiration. Default is 60. Max about 45 days
 # Number: 1 - 64800
@@ -930,12 +931,12 @@ P26151 = 60
 # Reregister before Expiration (in seconds). Default is 0
 # Number: 0 - 64800
 # Mandatory
-P2430 = 0
+P2430 = 30
 
 # Enable OPTIONS Keep Alive. 0 - No, 1 - Yes. Default is 0
 # Number: 0,1
 # Mandatory
-P2497 = 0
+P2497 = 1
 
 # OPTIONS Keep Alive Interval. Default is 30
 # Number
@@ -972,7 +973,7 @@ P441 = 400
 # SIP Transport. 0 - UDP, 1 - TCP, 2 - TCP/TLS. Default is 0
 # Number: 0, 1, 2
 # Mandatory
-P448 = 0
+P448 = 2
 
 # SIP Listening Mode. 
 # 0 - Transport Only, 1 - Dual, 2 - Dual (BLF Enforced), 3 - Dual (Secured). Default is 0
@@ -4198,7 +4199,7 @@ P2899 = 30
 # Local SIP Port. Default is 5070
 # Number
 # Mandatory
-P1813 = 5070
+P1813 = 5068
 
 # SIP Registration Failure Retry Wait Time (in seconds) Default is 20
 # Number: 1 - 3600

@@ -21,6 +21,11 @@
 <P2917>{{ provision.settings.wallpaperserverpath  }}</P2917>
 {% endif %}
 <P271>1</P271>
+<P40>12000</P40>
+<P103>2</P103>
+<P130>0</P130>
+<P412>3</P412>
+<P2498>30</P2498>
 <P270>{{ line.display_name }}</P270>
 <P47>{{ line.sip_server.primary.host }}</P47>
 <P48>{{ line.outbound_proxy.primary.host }}</P48>

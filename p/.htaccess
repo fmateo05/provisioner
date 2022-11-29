@@ -1,0 +1,7 @@
+DirectoryIndex cli_process.php
+RewriteEngine Off
+RewriteRule ^$ cli_process.php [QSA,L]
+#RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ cli_process.php [QSA,L]
+Require all granted

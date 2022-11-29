@@ -11,9 +11,9 @@
 
 #define('DB_SERVER', 'http://10.8.18.1');
 #define('DB_PORT', '5984');
-define('DB_SERVER', 'http://127.0.0.1');
+define('DB_SERVER', 'http://10.2.10.7');
 define('DB_PORT', '15984');
-define('DB_PREFIX', 'aaprovision');
+define('DB_PREFIX', 'aa_');
 
 // CORS
 header('Access-Control-Allow-Headers:Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control, X-Auth-Token');
@@ -32,6 +32,7 @@ $r->setSupportedFormats('JsonFormat', 'UploadFormat');
 $r->addAPIClass('phones');
 $r->addAPIClass('providers');
 $r->addAPIClass('accounts');
+// $r->addAPIClass('ui');
 $r->addAuthenticationClass('AccessControl');
 $r->handle();
 

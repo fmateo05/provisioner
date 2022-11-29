@@ -1,0 +1,49 @@
+{   
+    "h5": {
+        "folder": "h5",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+
+    "i30": {
+        "folder": "i30",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+
+    "x1sp": {
+        "folder": "x1sp",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+    "x2p": {
+        "folder": "x2p",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     },
+    "x210": {
+        "folder": "x210",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     }
+}
