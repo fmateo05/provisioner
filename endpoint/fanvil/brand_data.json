@@ -45,5 +45,24 @@
         "regexs": [
             "/[0-9a-f]{12}\\.cfg$/i"
         ]
+     },
+    "x3g": {
+        "folder": "x210",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     },
+    "x3sg": {
+        "folder": "x210",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
      }
+
 }
