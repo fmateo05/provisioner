@@ -5,6 +5,7 @@ The provisioner is an application to generate provisioning information for hardw
 * Yealink T2x and T4x
 * Polycom SoundPoint and VVX
 * Grandstream GXP2170 and GXP2130
+# Update: Added some more brands with initial configs (Fanvil, ClearlyIP, Digium, Flyingvoice...)
 
 # Data flow
 
