@@ -1,0 +1,73 @@
+{   
+    "fip1x": {
+        "folder": "fip1x",
+        "config_files": [
+            "y000000000000.boot",
+            "y000000000000.cfg",
+            "$mac.cfg"
+        ],
+        "regexs": [
+	    "/y0000000000[0-9]{2}\\.boot$/i" ,
+	    "/y0000000000[0-9]{2}\\.cfg$/i" ,
+            "/[0-9a-f]{12}\\.cfg$/i"
+
+        ]
+    },
+
+    "i30": {
+        "folder": "i30",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+
+    "x1sp": {
+        "folder": "x1sp",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+    "x2p": {
+        "folder": "x2p",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     },
+    "x210": {
+        "folder": "x210",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     },
+    "x3g": {
+        "folder": "x210",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     },
+    "x3sg": {
+        "folder": "x210",
+        "config_files": [
+            "mac.cfg"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     }
+
+}
