@@ -290,3 +290,38 @@
 2022-11-30 11:52:22 - DEBUG --> Request coming from 10.1.10.4
 2022-11-30 11:52:24 - DEBUG --> Will now edit the mac_lookup...
 2022-11-30 11:52:24 - DEBUG --> done... Edit for account d70a9e311aa88671ccd40c731a3d2ea2 and mac_address 19331a000001 SUCCESS
+2022-11-30 12:19:41 - INFO --> ======================================================
+2022-11-30 12:19:41 - INFO --> ================== Starting process ==================
+2022-11-30 12:19:41 - INFO --> ======================================================
+2022-11-30 12:19:41 - DEBUG --> Connecting to BigCouch...
+2022-11-30 12:19:41 - DEBUG -->  - GET - retrieve account doc d70a9e311aa88671ccd40c731a3d2ea2
+2022-11-30 12:19:41 - DEBUG --> Request coming from 10.1.10.4
+2022-11-30 12:19:41 - INFO --> ======================================================
+2022-11-30 12:19:41 - INFO --> ================== Starting process ==================
+2022-11-30 12:19:41 - INFO --> ======================================================
+2022-11-30 12:19:41 - DEBUG --> Connecting to BigCouch...
+2022-11-30 12:19:41 - DEBUG -->  - POST - edit account doc d70a9e311aa88671ccd40c731a3d2ea2
+2022-11-30 12:19:41 - DEBUG --> Request coming from 10.1.10.4
+2022-11-30 12:19:43 - INFO --> ======================================================
+2022-11-30 12:19:43 - INFO --> ================== Starting process ==================
+2022-11-30 12:19:43 - INFO --> ======================================================
+2022-11-30 12:19:43 - DEBUG --> Connecting to BigCouch...
+2022-11-30 12:19:43 - DEBUG -->  - GET - retrieve account doc d70a9e311aa88671ccd40c731a3d2ea2 for mac doc 19331a000001
+2022-11-30 12:19:43 - DEBUG --> Request coming from 10.1.10.4
+2022-11-30 12:19:44 - INFO --> ======================================================
+2022-11-30 12:19:44 - INFO --> ================== Starting process ==================
+2022-11-30 12:19:44 - INFO --> ======================================================
+2022-11-30 12:19:44 - DEBUG --> Connecting to BigCouch...
+2022-11-30 12:19:44 - DEBUG -->  - POST - edit in doc d70a9e311aa88671ccd40c731a3d2ea2 mac address 19331a000001
+2022-11-30 12:19:44 - DEBUG --> Request coming from 10.1.10.4
+2022-11-30 12:19:46 - DEBUG --> Will now edit the mac_lookup...
+2022-11-30 12:19:47 - DEBUG --> done... Edit for account d70a9e311aa88671ccd40c731a3d2ea2 and mac_address 19331a000001 SUCCESS
+2022-11-30 12:32:17 - INFO --> ======================================================
+2022-11-30 12:32:17 - INFO --> ================== Starting process ==================
+2022-11-30 12:32:17 - INFO --> ======================================================
+2022-11-30 12:32:17 - DEBUG --> Connecting to BigCouch...
+2022-11-30 12:32:17 - DEBUG -->  - DELETE - Deleting a device (19331a000001) for account d70a9e311aa88671ccd40c731a3d2ea2...
+2022-11-30 12:32:17 - DEBUG --> Request coming from 10.1.10.4
+2022-11-30 12:32:17 - DEBUG --> The device does exist... let's delete it
+2022-11-30 12:32:18 - DEBUG --> Now deleting the mac lookup entry...
+2022-11-30 12:32:18 - DEBUG --> Successfully deleted device (19331a000001)

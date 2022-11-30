@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <style>
+    <phone>
+      <dsskey>
+		<key type="9">
+          <icon src="https://image.example.com/XML-594.png" />
+        </key>
+		<key type="51">
+          <icon src="www.example.com/XML-839.png" />
+        </key>
+        <key id="2" type="10">
+          <icon src="www.example.com/XML-839.png" />
+        </key>
+        <key id="3" type="10">
+          <icon src="www.example.com/XML-839.png" />
+        </key>
+        <key id="4" type="10">
+          <icon src="www.example.com/XML-839.png" />
+        </key>
+        <key id="8" type="56">
+          <icon src="www.example.com/XML-840.png" />
+        </key>
+      </dsskey>
+    </phone>
+  <expand>
+    <dsskey>
+    </dsskey>
+  </expand>
+</style>

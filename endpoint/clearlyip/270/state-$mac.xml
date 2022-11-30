@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<Softkey>
+  <CallFailed>
+    <Enable>
+      <Key Type="NewCall"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="NewCall"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="NewCall"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Disable>
+  </CallFailed>
+  <CallIn>
+    <Enable>
+      <Key Type="Answer"/>
+      <Key Type="Forward"/>
+      <Key Type="Silence"/>
+      <Key Type="Reject"/>
+    </Enable>
+    <Default>
+      <Key Type="Answer"/>
+      <Key Type="Forward"/>
+      <Key Type="Silence"/>
+      <Key Type="Reject"/>
+    </Default>
+    <Disable>
+      <Key Type="Answer"/>
+      <Key Type="Call Switch"/>
+      <Key Type="Forward"/>
+      <Key Type="Empty"/>
+      <Key Type="Reject"/>
+      <Key Type="Silence"/>
+    </Disable>
+  </CallIn>
+  <Conferenced>
+    <Enable>
+      <Key Type="Empty"/>
+      <Key Type="Hold"/>
+      <Key Type="Split"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Empty"/>
+      <Key Type="Hold"/>
+      <Key Type="Split"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Hold"/>
+      <Key Type="Mute"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+      <Key Type="Split"/>
+    </Disable>
+  </Conferenced>
+  <Talk>
+    <Enable>
+      <Key Type="Transfer"/>
+      <Key Type="Hold"/>
+      <Key Type="Conference"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Transfer"/>
+      <Key Type="Hold"/>
+      <Key Type="Conference"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Conference"/>
+      <Key Type="Hold"/>
+      <Key Type="Mute"/>
+      <Key Type="NewCall"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+      <Key Type="Speed Dial"/>
+      <Key Type="SWAP"/>
+      <Key Type="Transfer"/>
+    </Disable>
+  </Talk>
+  <Dialing>
+    <Enable>
+      <Key Type="Send"/>
+      <Key Type="Empty"/>
+      <Key Type="Delete"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Send"/>
+      <Key Type="Empty"/>
+      <Key Type="Delete"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Delete"/>
+      <Key Type="Line"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+      <Key Type="Send"/>
+    </Disable>
+  </Dialing>
+  <Held>
+    <Enable>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="NewCall"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Disable>
+  </Held>
+  <Hold>
+    <Enable>
+      <Key Type="Transfer"/>
+      <Key Type="Resume"/>
+      <Key Type="NewCall"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Transfer"/>
+      <Key Type="Resume"/>
+      <Key Type="NewCall"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Conference"/>
+      <Key Type="NewCall"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+      <Key Type="Resume"/>
+      <Key Type="Transfer"/>
+    </Disable>
+  </Hold>
+  <RingBack>
+    <Enable>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Callback"/>
+      <Key Type="Call Switch"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Disable>
+  </RingBack>
+  <Connecting>
+    <Enable>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Disable>
+  </Connecting>
+  <SemiAttendTransBack>
+    <Enable>
+      <Key Type="Transfer"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Transfer"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+      <Key Type="Transfer"/>
+    </Disable>
+  </SemiAttendTransBack>
+  <PreTrans>
+    <Enable>
+      <Key Type="Transfer"/>
+      <Key Type="Send"/>
+      <Key Type="Delete"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Transfer"/>
+      <Key Type="Send"/>
+      <Key Type="Delete"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Delete"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+      <Key Type="Send"/>
+      <Key Type="Transfer"/>
+    </Disable>
+  </PreTrans>
+  <SemiAttendTrans>
+    <Enable>
+      <Key Type="Transfer"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Enable>
+    <Default>
+      <Key Type="Transfer"/>
+      <Key Type="Empty"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+    </Default>
+    <Disable>
+      <Key Type="Call Switch"/>
+      <Key Type="Empty"/>
+      <Key Type="Cancel"/>
+      <Key Type="Transfer"/>
+    </Disable>
+  </SemiAttendTrans>
+  <Callwaiting>
+    <Enable>
+      <Key Type="Transfer"/>
+      <Key Type="Answer"/>
+      <Key Type="Reject"/>
+      <Key Type="Cancel"/>
+      <Key Type="NewCall"/>
+    </Enable>
+    <Default>
+      <Key Type="Transfer"/>
+      <Key Type="Answer"/>
+      <Key Type="Reject"/>
+      <Key Type="Cancel"/>
+      <Key Type="NewCall"/>
+    </Default>
+    <Disable>
+      <Key Type="Answer"/>
+      <Key Type="NewCall"/>
+      <Key Type="Empty"/>
+      <Key Type="Reject"/>
+      <Key Type="Cancel"/>
+      <Key Type="Transfer"/>
+    </Disable>
+  </Callwaiting>
+</Softkey>
