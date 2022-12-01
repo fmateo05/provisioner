@@ -135,5 +135,31 @@
             "/[a-z0-9]{12}\\.xml/i",
             "/directory\\.xml/i"
 	]
-   }
+   },
+    "wp810": {
+        "folder": "wp810",
+        "config_files": [
+            "cfg$mac.xml",
+            "cfg$mac",
+            "directory.xml"
+        ],
+        "regexs": [
+            "/cfg.*/i",
+            "/[a-z0-9]{12}\\.xml/i",
+            "/directory\\.xml/i"
+	]
+   },
+    "wp820": {
+        "folder": "wp820",
+        "config_files": [
+            "cfg$mac.xml",
+            "cfg$mac",
+            "directory.xml"
+        ],
+        "regexs": [
+            "/cfg.*/i",
+            "/[a-z0-9]{12}\\.xml/i",
+            "/directory\\.xml/i"
+	]
+    }
 }
