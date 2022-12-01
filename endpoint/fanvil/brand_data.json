@@ -47,7 +47,7 @@
         ]
      },
     "x3g": {
-        "folder": "x210",
+        "folder": "x3g",
         "config_files": [
             "mac.cfg"
         ],
@@ -56,7 +56,7 @@
         ]
      },
     "x3sg": {
-        "folder": "x210",
+        "folder": "x3sg",
         "config_files": [
             "mac.cfg"
         ],

@@ -2,13 +2,14 @@
     "d40": {
         "folder": "d40",
         "config_files": [
-            "$mac.cfg",
-            "$mac-contacts.cfg",
+            "mac.cfg",
+            "mac-contacts.cfg",
             "$mac-smartblf.cfg"
         ],
         "regexs": [
             "/[a-z0-9]{12}\\.cfg/i",
-            "/mac-contacts\\.cfg/i"
+            "/mac-contacts\\.cfg/i",
+            "/$mac-smartblf.cfg/i"
         ]
     }
 
