@@ -1,0 +1,45 @@
+{   
+    "h5": {
+        "folder": "uc903",
+        "config_files": [
+            "$mac.cfg",
+            "phonebook.xml"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+
+    "uc923": {
+        "folder": "uc923",
+        "config_files": [
+            "$mac.cfg",
+            "phonebook.xml"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+
+    "uc924": {
+        "folder": "uc924",
+        "config_files": [
+            "$mac.cfg",
+            "phonebook.xml"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+    },
+    "uc926": {
+        "folder": "uc926",
+        "config_files": [
+            "$mac.cfg",
+            "phonebook.xml"
+        ],
+        "regexs": [
+            "/[0-9a-f]{12}\\.cfg$/i"
+        ]
+     }
+
+}
