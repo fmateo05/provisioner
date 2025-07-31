@@ -79,6 +79,3 @@ Note that you should configure fusionpbx with provisioner settings enabled and c
     Go to devices >> vendors >> Yealink (example) and put the values like the following: <br>
     'monitored call park' -> 10 <br>
     Repeat same addition for each brand for this entry. The idea is create a kind of duplicate but with the key type changed as above <br>
-   
-   
-     
