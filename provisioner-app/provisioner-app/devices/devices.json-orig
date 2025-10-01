@@ -1,0 +1,20 @@
+{
+    "success": true,
+    "data": [
+        {
+            "mac_address": "000b82f843e1",
+            "name": "test gs2170",
+            "brand": "grandstream",
+            "family": "gxp21xx",
+            "model": "gxp2170"
+        },
+        {
+            "mac_address": "000b82f843e2",
+            "name": "test yealink",
+            "brand": "yealink",
+            "family": "t",
+            "model": "t46g"
+        }
+    ],
+    "request_id": "e16ba744-a7e1-4348-8383-5f7ae23b449a"
+}
