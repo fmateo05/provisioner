@@ -1,6 +1,6 @@
 <?php
 
-$fusionpbx_host = '10.76.147.5';
+$fusionpbx_host = '<fusion-pbx-ip>';
 
 $subpaths = array_filter(explode('/', $_SERVER['REQUEST_URI']));
 if(isset($subpaths['4'])) {
