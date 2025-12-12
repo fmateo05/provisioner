@@ -1,0 +1,17 @@
+[Unit]
+Description=Nebula overlay networking tool
+Wants=basic.target network-online.target nss-lookup.target time-sync.target
+After=basic.target network.target network-online.target
+Before=sshd.service
+
+[Service]
+User=www-data
+Group=www-data
+NotifyAccess=main
+SyslogIdentifier=provisioner
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/usr/bin/php /var/www/html-alt/prov-websocket.php
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
