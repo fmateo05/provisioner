@@ -7,7 +7,7 @@ Note that you should configure fusionpbx with provisioner settings enabled and  
 ### Steps:
 
 1. Install a fusionpbx  normally on different instance or VPS <br>
-2. Setup a Webserver with NGINX PHP and Postgresql; then, import the provisioner-db.sql with proper user credentials, the schema is called 'provisioner', also install python3, postgresql client and curl and some of the php libraries. <br>
+2. Setup a Webserver with NGINX with SSL Certificates, PHP and Postgresql; then, import the provisioner-db.sql with proper user credentials (ie. provisioner), the schema is called 'provisioner', also install python3, postgresql client and curl and some of the php libraries. <br>
 3. Move or rename the api-phones-alternate.php file to index.php, edit and  the DB connection parameters with also the CORS headers at the top of the file (to your Monster-UI URL)  <br>
 4. Add a location block to the nginx server section like the following: 
 ````
@@ -132,5 +132,13 @@ location /creds {
 ```
 
 19. Load the app page and you will see the provisioner URL; but first you should add a device inside the created account and after that the URL will be populated.
-20. Then you can use the populated url to set it up on your DHCP-Option-66 capable router!! (Mine is some of ***Ubiquiti Edge Router X***)
+20. #### Configure DNS A records like the following <br>
+
+```
+*.prov.your-domain.tld IN A <IP of your fusionpbx instance>
+*.sip.your-domain.tld IN A <IP of your kamailio instance(s)>
+
+```
+
+21. Then you can use the populated url to set it up on your DHCP-Option-66 capable router!! (Mine is some of ***Ubiquiti Edge Router X***)
 
