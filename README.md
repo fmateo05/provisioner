@@ -2,7 +2,7 @@
 
 With this script you connect a kazoo webhook to it and then will get connected to couchdb and parse variables with postgresql queries to be executed on fusionpbx's environment.
 
-Note that you should configure fusionpbx with provisioner settings enabled and configure opentelecom's provisioner for visualize the phones JSON on SmartPBX
+Note that you should configure fusionpbx with provisioner settings enabled and  visualize the phones JSON on SmartPBX
 
 ### Steps:
 
