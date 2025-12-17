@@ -1,0 +1,2650 @@
+{
+    "success": true,
+    "data": {
+        "template": {
+            "lines": {
+                "iterate": 2,
+                "text": "Lines",
+                "data": {
+                    "basic": {
+                        "text": "Basic",
+                        "data": {
+                            "enable": {
+                                "text": "Enable",
+                                "type": "select",
+                                "value": true,
+                                "options": [
+                                    {
+                                        "text": "Enabled",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "Disabled",
+                                        "value": false
+                                    }
+                                ]
+                            },
+                            "display_name": {
+                                "text": "Display Name",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "transport": {
+                                "text": "Transport",
+                                "type": "select",
+                                "value": "dns",
+                                "options": [
+                                    {
+                                        "text": "UDP",
+                                        "value": "udp"
+                                    },
+                                    {
+                                        "text": "TCP",
+                                        "value": "tcp"
+                                    },
+                                    {
+                                        "text": "TLS",
+                                        "value": "tls"
+                                    },
+                                    {
+                                        "text": "SRV/NAPTR",
+                                        "value": "dns"
+                                    }
+                                ]
+                            },
+                            "expire": {
+                                "text": "Expire time",
+                                "type": "text",
+                                "value": "360"
+                            },
+                            "voicemail": {
+                                "text": "Voicemail number",
+                                "type": "text",
+                                "value": "*97"
+                            }
+                        }
+                    },
+                    "sip": {
+                        "text": "SIP",
+                        "data": {
+                            "realm": {
+                                "text": "SIP Realm",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "username": {
+                                "text": "SIP Username",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "password": {
+                                "text": "SIP Password",
+                                "type": "password",
+                                "value": ""
+                            },
+                            "primary_server_address": {
+                                "text": "Primary Address",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "primary_server_port": {
+                                "text": "Primary Port",
+                                "type": "text",
+                                "value": "7000"
+                            },
+                            "secondary_server_address": {
+                                "text": "Secondary Address",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "secondary_server_port": {
+                                "text": "Secondary Port",
+                                "type": "text",
+                                "value": "7000"
+                            },
+                            "use_geoip": {
+                                "text": "Use GeoIP",
+                                "tooltip": "Enables or disables geolocation by IP address to set primary/secondary addresses and ports.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "Enabled",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "Disabled",
+                                        "value": false
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "advanced": {
+                        "text": "Advanced",
+                        "data": {
+                            "srtp": {
+                                "text": "RTP Encryption (SRTP)",
+                                "type": "select",
+                                "tooltip": "Enables or disables attempts to encrypt the voice (RTP) of initiated phone calls.  Requires the PBX to also be configured with this option.",
+                                "value": 0,
+                                "options": [
+                                    {
+                                        "text": "Disabled",
+                                        "value": "0"
+                                    },
+                                    {
+                                        "text": "Use SRTP Only",
+                                        "value": "2"
+                                    },
+                                    {
+                                        "text": "Use SRTP When Possible",
+                                        "value": "1"
+                                    }
+                                ]
+                            },
+                            "udp_keep_alive": {
+                                "text": "UDP Keep Alive",
+                                "type": "select",
+                                "tooltip": "Enables or disables keep-alive packets sent by the phone through the NAT device to keep the communication port open.",
+                                "value": true,
+                                "options": [
+                                    {
+                                        "text": "Enabled",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "Disabled",
+                                        "value": false
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "dtmf_method": {
+                        "text": "Prefered DTMF Method",
+                        "data": {
+                            "1": {
+                                "text": "Priority 1",
+                                "type": "select",
+                                "value": 101,
+                                "options": [
+                                    {
+                                        "text": "In-audio",
+                                        "value": 100
+                                    },
+                                    {
+                                        "text": "RFC2833",
+                                        "value": 101
+                                    },
+                                    {
+                                        "text": "SIP INFO",
+                                        "value": 102
+                                    }
+                                ]
+                            },
+                            "2": {
+                                "text": "Priority 2",
+                                "type": "select",
+                                "value": 101,
+                                "options": [
+                                    {
+                                        "text": "In-audio",
+                                        "value": 100
+                                    },
+                                    {
+                                        "text": "RFC2833",
+                                        "value": 101
+                                    },
+                                    {
+                                        "text": "SIP INFO",
+                                        "value": 102
+                                    }
+                                ]
+                            },
+                            "3": {
+                                "text": "Priority 3",
+                                "type": "select",
+                                "value": 101,
+                                "options": [
+                                    {
+                                        "text": "In-audio",
+                                        "value": 100
+                                    },
+                                    {
+                                        "text": "RFC2833",
+                                        "value": 101
+                                    },
+                                    {
+                                        "text": "SIP INFO",
+                                        "value": 102
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "codecs": {
+                "iterate": 2,
+                "text": "Codecs",
+                "data": {
+                    "audio": {
+                        "text": "Audio",
+                        "data": {
+                            "primary_codec": {
+                                "type": "select",
+                                "text": "Primary codec",
+                                "value": "pcmu",
+                                "options": [
+                                    {
+                                        "text": "PCMU",
+                                        "value": "pcmu"
+                                    },
+                                    {
+                                        "text": "G729",
+                                        "value": "g729"
+                                    },
+                                    {
+                                        "text": "G726-16",
+                                        "value": "g726-16"
+                                    },
+                                    {
+                                        "text": "G726-24",
+                                        "value": "g726-24"
+                                    },
+                                    {
+                                        "text": "G726-32",
+                                        "value": "g726-32"
+                                    },
+                                    {
+                                        "text": "G726-40",
+                                        "value": "g726-40"
+                                    },
+                                    {
+                                        "text": "iLBC",
+                                        "value": "ilbc"
+                                    },
+                                    {
+                                        "text": "PCMA",
+                                        "value": "pcma"
+                                    },
+                                    {
+                                        "text": "OPUS",
+                                        "value": "opus"
+                                    }
+                                ]
+                            },
+                            "secondary_codec": {
+                                "type": "select",
+                                "text": "Secondary codec",
+                                "value": "none",
+                                "options": [
+                                    {
+                                        "text": "None",
+                                        "value": "none"
+                                    },
+                                    {
+                                        "text": "PCMU",
+                                        "value": "pcmu"
+                                    },
+                                    {
+                                        "text": "G729",
+                                        "value": "g729"
+                                    },
+                                    {
+                                        "text": "G726-16",
+                                        "value": "g726-16"
+                                    },
+                                    {
+                                        "text": "G726-24",
+                                        "value": "g726-24"
+                                    },
+                                    {
+                                        "text": "G726-32",
+                                        "value": "g726-32"
+                                    },
+                                    {
+                                        "text": "G726-40",
+                                        "value": "g726-40"
+                                    },
+                                    {
+                                        "text": "iLBC",
+                                        "value": "ilbc"
+                                    },
+                                    {
+                                        "text": "PCMA",
+                                        "value": "pcma"
+                                    },
+                                    {
+                                        "text": "OPUS",
+                                        "value": "opus"
+                                    }
+                                ]
+                            },
+                            "tertiary_codec": {
+                                "type": "select",
+                                "text": "Tertiary codec",
+                                "value": "none",
+                                "options": [
+                                    {
+                                        "text": "None",
+                                        "value": "none"
+                                    },
+                                    {
+                                        "text": "PCMU",
+                                        "value": "pcmu"
+                                    },
+                                    {
+                                        "text": "G729",
+                                        "value": "g729"
+                                    },
+                                    {
+                                        "text": "G726-16",
+                                        "value": "g726-16"
+                                    },
+                                    {
+                                        "text": "G726-24",
+                                        "value": "g726-24"
+                                    },
+                                    {
+                                        "text": "G726-32",
+                                        "value": "g726-32"
+                                    },
+                                    {
+                                        "text": "G726-40",
+                                        "value": "g726-40"
+                                    },
+                                    {
+                                        "text": "iLBC",
+                                        "value": "ilbc"
+                                    },
+                                    {
+                                        "text": "PCMA",
+                                        "value": "pcma"
+                                    },
+                                    {
+                                        "text": "OPUS",
+                                        "value": "opus"
+                                    }
+                                ]
+                            },
+                            "quaternary_codec": {
+                                "type": "select",
+                                "text": "Quaternary codec",
+                                "value": "none",
+                                "options": [
+                                    {
+                                        "text": "None",
+                                        "value": "none"
+                                    },
+                                    {
+                                        "text": "PCMU",
+                                        "value": "pcmu"
+                                    },
+                                    {
+                                        "text": "G729",
+                                        "value": "g729"
+                                    },
+                                    {
+                                        "text": "G726-16",
+                                        "value": "g726-16"
+                                    },
+                                    {
+                                        "text": "G726-24",
+                                        "value": "g726-24"
+                                    },
+                                    {
+                                        "text": "G726-32",
+                                        "value": "g726-32"
+                                    },
+                                    {
+                                        "text": "G726-40",
+                                        "value": "g726-40"
+                                    },
+                                    {
+                                        "text": "iLBC",
+                                        "value": "ilbc"
+                                    },
+                                    {
+                                        "text": "PCMA",
+                                        "value": "pcma"
+                                    },
+                                    {
+                                        "text": "OPUS",
+                                        "value": "opus"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "datetime": {
+                "text": "Date & Time",
+                "data": {
+                    "time": {
+                        "text": "Time",
+                        "data": {
+                            "hour_24": {
+                                "text": "Format",
+                                "tooltip": "This setting determines how the time displays on the phone's screen. Select 12:00 a.m. / p.m. to display the time in 12-hour clock notation (for example, 1:00 p.m.). Select 24 to display the time in 24-hour clock notation (for example, 13:00).",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "12:00 a.m. / p.m.",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "24 Hours",
+                                        "value": true
+                                    }
+                                ]
+                            },
+                            "timezone": {
+                                "text": "Time Zone",
+                                "tooltip": "Choose the time zone where the phone is located.",
+                                "type": "select",
+                                "value": "America/Los_Angeles",
+                                "options": [
+                                    {
+                                        "text": "Africa/Abidjan",
+                                        "value": "Africa/Abidjan"
+                                    },
+                                    {
+                                        "text": "Africa/Accra",
+                                        "value": "Africa/Accra"
+                                    },
+                                    {
+                                        "text": "Africa/Addis_Ababa",
+                                        "value": "Africa/Addis_Ababa"
+                                    },
+                                    {
+                                        "text": "Africa/Algiers",
+                                        "value": "Africa/Algiers"
+                                    },
+                                    {
+                                        "text": "Africa/Asmera",
+                                        "value": "Africa/Asmera"
+                                    },
+                                    {
+                                        "text": "Africa/Bamako",
+                                        "value": "Africa/Bamako"
+                                    },
+                                    {
+                                        "text": "Africa/Bangui",
+                                        "value": "Africa/Bangui"
+                                    },
+                                    {
+                                        "text": "Africa/Banjul",
+                                        "value": "Africa/Banjul"
+                                    },
+                                    {
+                                        "text": "Africa/Bissau",
+                                        "value": "Africa/Bissau"
+                                    },
+                                    {
+                                        "text": "Africa/Blantyre",
+                                        "value": "Africa/Blantyre"
+                                    },
+                                    {
+                                        "text": "Africa/Brazzaville",
+                                        "value": "Africa/Brazzaville"
+                                    },
+                                    {
+                                        "text": "Africa/Bujumbura",
+                                        "value": "Africa/Bujumbura"
+                                    },
+                                    {
+                                        "text": "Africa/Cairo",
+                                        "value": "Africa/Cairo"
+                                    },
+                                    {
+                                        "text": "Africa/Casablanca",
+                                        "value": "Africa/Casablanca"
+                                    },
+                                    {
+                                        "text": "Africa/Ceuta",
+                                        "value": "Africa/Ceuta"
+                                    },
+                                    {
+                                        "text": "Africa/Conakry",
+                                        "value": "Africa/Conakry"
+                                    },
+                                    {
+                                        "text": "Africa/Dakar",
+                                        "value": "Africa/Dakar"
+                                    },
+                                    {
+                                        "text": "Africa/Dar_es_Salaam",
+                                        "value": "Africa/Dar_es_Salaam"
+                                    },
+                                    {
+                                        "text": "Africa/Djibouti",
+                                        "value": "Africa/Djibouti"
+                                    },
+                                    {
+                                        "text": "Africa/Douala",
+                                        "value": "Africa/Douala"
+                                    },
+                                    {
+                                        "text": "Africa/El_Aaiun",
+                                        "value": "Africa/El_Aaiun"
+                                    },
+                                    {
+                                        "text": "Africa/Freetown",
+                                        "value": "Africa/Freetown"
+                                    },
+                                    {
+                                        "text": "Africa/Gaborone",
+                                        "value": "Africa/Gaborone"
+                                    },
+                                    {
+                                        "text": "Africa/Harare",
+                                        "value": "Africa/Harare"
+                                    },
+                                    {
+                                        "text": "Africa/Johannesburg",
+                                        "value": "Africa/Johannesburg"
+                                    },
+                                    {
+                                        "text": "Africa/Kampala",
+                                        "value": "Africa/Kampala"
+                                    },
+                                    {
+                                        "text": "Africa/Khartoum",
+                                        "value": "Africa/Khartoum"
+                                    },
+                                    {
+                                        "text": "Africa/Kigali",
+                                        "value": "Africa/Kigali"
+                                    },
+                                    {
+                                        "text": "Africa/Kinshasa",
+                                        "value": "Africa/Kinshasa"
+                                    },
+                                    {
+                                        "text": "Africa/Lagos",
+                                        "value": "Africa/Lagos"
+                                    },
+                                    {
+                                        "text": "Africa/Libreville",
+                                        "value": "Africa/Libreville"
+                                    },
+                                    {
+                                        "text": "Africa/Lome",
+                                        "value": "Africa/Lome"
+                                    },
+                                    {
+                                        "text": "Africa/Luanda",
+                                        "value": "Africa/Luanda"
+                                    },
+                                    {
+                                        "text": "Africa/Lubumbashi",
+                                        "value": "Africa/Lubumbashi"
+                                    },
+                                    {
+                                        "text": "Africa/Lusaka",
+                                        "value": "Africa/Lusaka"
+                                    },
+                                    {
+                                        "text": "Africa/Malabo",
+                                        "value": "Africa/Malabo"
+                                    },
+                                    {
+                                        "text": "Africa/Maputo",
+                                        "value": "Africa/Maputo"
+                                    },
+                                    {
+                                        "text": "Africa/Maseru",
+                                        "value": "Africa/Maseru"
+                                    },
+                                    {
+                                        "text": "Africa/Mbabane",
+                                        "value": "Africa/Mbabane"
+                                    },
+                                    {
+                                        "text": "Africa/Mogadishu",
+                                        "value": "Africa/Mogadishu"
+                                    },
+                                    {
+                                        "text": "Africa/Monrovia",
+                                        "value": "Africa/Monrovia"
+                                    },
+                                    {
+                                        "text": "Africa/Nairobi",
+                                        "value": "Africa/Nairobi"
+                                    },
+                                    {
+                                        "text": "Africa/Ndjamena",
+                                        "value": "Africa/Ndjamena"
+                                    },
+                                    {
+                                        "text": "Africa/Niamey",
+                                        "value": "Africa/Niamey"
+                                    },
+                                    {
+                                        "text": "Africa/Nouakchott",
+                                        "value": "Africa/Nouakchott"
+                                    },
+                                    {
+                                        "text": "Africa/Ouagadougou",
+                                        "value": "Africa/Ouagadougou"
+                                    },
+                                    {
+                                        "text": "Africa/Porto-Novo",
+                                        "value": "Africa/Porto-Novo"
+                                    },
+                                    {
+                                        "text": "Africa/Sao_Tome",
+                                        "value": "Africa/Sao_Tome"
+                                    },
+                                    {
+                                        "text": "Africa/Timbuktu",
+                                        "value": "Africa/Timbuktu"
+                                    },
+                                    {
+                                        "text": "Africa/Tripoli",
+                                        "value": "Africa/Tripoli"
+                                    },
+                                    {
+                                        "text": "Africa/Tunis",
+                                        "value": "Africa/Tunis"
+                                    },
+                                    {
+                                        "text": "Africa/Windhoek",
+                                        "value": "Africa/Windhoek"
+                                    },
+                                    {
+                                        "text": "America/Adak",
+                                        "value": "America/Adak"
+                                    },
+                                    {
+                                        "text": "America/Anchorage",
+                                        "value": "America/Anchorage"
+                                    },
+                                    {
+                                        "text": "America/Anguilla",
+                                        "value": "America/Anguilla"
+                                    },
+                                    {
+                                        "text": "America/Antigua",
+                                        "value": "America/Antigua"
+                                    },
+                                    {
+                                        "text": "America/Araguaina",
+                                        "value": "America/Araguaina"
+                                    },
+                                    {
+                                        "text": "America/Aruba",
+                                        "value": "America/Aruba"
+                                    },
+                                    {
+                                        "text": "America/Asuncion",
+                                        "value": "America/Asuncion"
+                                    },
+                                    {
+                                        "text": "America/Barbados",
+                                        "value": "America/Barbados"
+                                    },
+                                    {
+                                        "text": "America/Belem",
+                                        "value": "America/Belem"
+                                    },
+                                    {
+                                        "text": "America/Belize",
+                                        "value": "America/Belize"
+                                    },
+                                    {
+                                        "text": "America/Boa_Vista",
+                                        "value": "America/Boa_Vista"
+                                    },
+                                    {
+                                        "text": "America/Bogota",
+                                        "value": "America/Bogota"
+                                    },
+                                    {
+                                        "text": "America/Boise",
+                                        "value": "America/Boise"
+                                    },
+                                    {
+                                        "text": "America/Buenos_Aires",
+                                        "value": "America/Buenos_Aires"
+                                    },
+                                    {
+                                        "text": "America/Cambridge_Bay",
+                                        "value": "America/Cambridge_Bay"
+                                    },
+                                    {
+                                        "text": "America/Cancun",
+                                        "value": "America/Cancun"
+                                    },
+                                    {
+                                        "text": "America/Caracas",
+                                        "value": "America/Caracas"
+                                    },
+                                    {
+                                        "text": "America/Catamarca",
+                                        "value": "America/Catamarca"
+                                    },
+                                    {
+                                        "text": "America/Cayenne",
+                                        "value": "America/Cayenne"
+                                    },
+                                    {
+                                        "text": "America/Cayman",
+                                        "value": "America/Cayman"
+                                    },
+                                    {
+                                        "text": "America/Chicago",
+                                        "value": "America/Chicago"
+                                    },
+                                    {
+                                        "text": "America/Chihuahua",
+                                        "value": "America/Chihuahua"
+                                    },
+                                    {
+                                        "text": "America/Cordoba",
+                                        "value": "America/Cordoba"
+                                    },
+                                    {
+                                        "text": "America/Costa_Rica",
+                                        "value": "America/Costa_Rica"
+                                    },
+                                    {
+                                        "text": "America/Cuiaba",
+                                        "value": "America/Cuiaba"
+                                    },
+                                    {
+                                        "text": "America/Curacao",
+                                        "value": "America/Curacao"
+                                    },
+                                    {
+                                        "text": "America/Danmarkshavn",
+                                        "value": "America/Danmarkshavn"
+                                    },
+                                    {
+                                        "text": "America/Dawson",
+                                        "value": "America/Dawson"
+                                    },
+                                    {
+                                        "text": "America/Dawson_Creek",
+                                        "value": "America/Dawson_Creek"
+                                    },
+                                    {
+                                        "text": "America/Denver",
+                                        "value": "America/Denver"
+                                    },
+                                    {
+                                        "text": "America/Detroit",
+                                        "value": "America/Detroit"
+                                    },
+                                    {
+                                        "text": "America/Dominica",
+                                        "value": "America/Dominica"
+                                    },
+                                    {
+                                        "text": "America/Edmonton",
+                                        "value": "America/Edmonton"
+                                    },
+                                    {
+                                        "text": "America/Eirunepe",
+                                        "value": "America/Eirunepe"
+                                    },
+                                    {
+                                        "text": "America/El_Salvador",
+                                        "value": "America/El_Salvador"
+                                    },
+                                    {
+                                        "text": "America/Fortaleza",
+                                        "value": "America/Fortaleza"
+                                    },
+                                    {
+                                        "text": "America/Glace_Bay",
+                                        "value": "America/Glace_Bay"
+                                    },
+                                    {
+                                        "text": "America/Godthab",
+                                        "value": "America/Godthab"
+                                    },
+                                    {
+                                        "text": "America/Goose_Bay",
+                                        "value": "America/Goose_Bay"
+                                    },
+                                    {
+                                        "text": "America/Grand_Turk",
+                                        "value": "America/Grand_Turk"
+                                    },
+                                    {
+                                        "text": "America/Grenada",
+                                        "value": "America/Grenada"
+                                    },
+                                    {
+                                        "text": "America/Guadeloupe",
+                                        "value": "America/Guadeloupe"
+                                    },
+                                    {
+                                        "text": "America/Guatemala",
+                                        "value": "America/Guatemala"
+                                    },
+                                    {
+                                        "text": "America/Guayaquil",
+                                        "value": "America/Guayaquil"
+                                    },
+                                    {
+                                        "text": "America/Guyana",
+                                        "value": "America/Guyana"
+                                    },
+                                    {
+                                        "text": "America/Halifax",
+                                        "value": "America/Halifax"
+                                    },
+                                    {
+                                        "text": "America/Havana",
+                                        "value": "America/Havana"
+                                    },
+                                    {
+                                        "text": "America/Hermosillo",
+                                        "value": "America/Hermosillo"
+                                    },
+                                    {
+                                        "text": "America/Indiana/Indianapolis",
+                                        "value": "America/Indiana/Indianapolis"
+                                    },
+                                    {
+                                        "text": "America/Indiana/Knox",
+                                        "value": "America/Indiana/Knox"
+                                    },
+                                    {
+                                        "text": "America/Indiana/Marengo",
+                                        "value": "America/Indiana/Marengo"
+                                    },
+                                    {
+                                        "text": "America/Indiana/Vevay",
+                                        "value": "America/Indiana/Vevay"
+                                    },
+                                    {
+                                        "text": "America/Indianapolis",
+                                        "value": "America/Indianapolis"
+                                    },
+                                    {
+                                        "text": "America/Inuvik",
+                                        "value": "America/Inuvik"
+                                    },
+                                    {
+                                        "text": "America/Iqaluit",
+                                        "value": "America/Iqaluit"
+                                    },
+                                    {
+                                        "text": "America/Jamaica",
+                                        "value": "America/Jamaica"
+                                    },
+                                    {
+                                        "text": "America/Jujuy",
+                                        "value": "America/Jujuy"
+                                    },
+                                    {
+                                        "text": "America/Juneau",
+                                        "value": "America/Juneau"
+                                    },
+                                    {
+                                        "text": "America/Kentucky/Louisville",
+                                        "value": "America/Kentucky/Louisville"
+                                    },
+                                    {
+                                        "text": "America/Kentucky/Monticello",
+                                        "value": "America/Kentucky/Monticello"
+                                    },
+                                    {
+                                        "text": "America/La_Paz",
+                                        "value": "America/La_Paz"
+                                    },
+                                    {
+                                        "text": "America/Lima",
+                                        "value": "America/Lima"
+                                    },
+                                    {
+                                        "text": "America/Los_Angeles",
+                                        "value": "America/Los_Angeles"
+                                    },
+                                    {
+                                        "text": "America/Louisville",
+                                        "value": "America/Louisville"
+                                    },
+                                    {
+                                        "text": "America/Maceio",
+                                        "value": "America/Maceio"
+                                    },
+                                    {
+                                        "text": "America/Managua",
+                                        "value": "America/Managua"
+                                    },
+                                    {
+                                        "text": "America/Manaus",
+                                        "value": "America/Manaus"
+                                    },
+                                    {
+                                        "text": "America/Martinique",
+                                        "value": "America/Martinique"
+                                    },
+                                    {
+                                        "text": "America/Mazatlan",
+                                        "value": "America/Mazatlan"
+                                    },
+                                    {
+                                        "text": "America/Mendoza",
+                                        "value": "America/Mendoza"
+                                    },
+                                    {
+                                        "text": "America/Menominee",
+                                        "value": "America/Menominee"
+                                    },
+                                    {
+                                        "text": "America/Merida",
+                                        "value": "America/Merida"
+                                    },
+                                    {
+                                        "text": "America/Mexico_City",
+                                        "value": "America/Mexico_City"
+                                    },
+                                    {
+                                        "text": "America/Miquelon",
+                                        "value": "America/Miquelon"
+                                    },
+                                    {
+                                        "text": "America/Monterrey",
+                                        "value": "America/Monterrey"
+                                    },
+                                    {
+                                        "text": "America/Montevideo",
+                                        "value": "America/Montevideo"
+                                    },
+                                    {
+                                        "text": "America/Montreal",
+                                        "value": "America/Montreal"
+                                    },
+                                    {
+                                        "text": "America/Montserrat",
+                                        "value": "America/Montserrat"
+                                    },
+                                    {
+                                        "text": "America/Nassau",
+                                        "value": "America/Nassau"
+                                    },
+                                    {
+                                        "text": "America/New_York",
+                                        "value": "America/New_York"
+                                    },
+                                    {
+                                        "text": "America/Nipigon",
+                                        "value": "America/Nipigon"
+                                    },
+                                    {
+                                        "text": "America/Nome",
+                                        "value": "America/Nome"
+                                    },
+                                    {
+                                        "text": "America/Noronha",
+                                        "value": "America/Noronha"
+                                    },
+                                    {
+                                        "text": "America/North_Dakota/Center",
+                                        "value": "America/North_Dakota/Center"
+                                    },
+                                    {
+                                        "text": "America/Panama",
+                                        "value": "America/Panama"
+                                    },
+                                    {
+                                        "text": "America/Pangnirtung",
+                                        "value": "America/Pangnirtung"
+                                    },
+                                    {
+                                        "text": "America/Paramaribo",
+                                        "value": "America/Paramaribo"
+                                    },
+                                    {
+                                        "text": "America/Phoenix",
+                                        "value": "America/Phoenix"
+                                    },
+                                    {
+                                        "text": "America/Port_of_Spain",
+                                        "value": "America/Port_of_Spain"
+                                    },
+                                    {
+                                        "text": "America/Port-au-Prince",
+                                        "value": "America/Port-au-Prince"
+                                    },
+                                    {
+                                        "text": "America/Porto_Velho",
+                                        "value": "America/Porto_Velho"
+                                    },
+                                    {
+                                        "text": "America/Puerto_Rico",
+                                        "value": "America/Puerto_Rico"
+                                    },
+                                    {
+                                        "text": "America/Rainy_River",
+                                        "value": "America/Rainy_River"
+                                    },
+                                    {
+                                        "text": "America/Rankin_Inlet",
+                                        "value": "America/Rankin_Inlet"
+                                    },
+                                    {
+                                        "text": "America/Recife",
+                                        "value": "America/Recife"
+                                    },
+                                    {
+                                        "text": "America/Regina",
+                                        "value": "America/Regina"
+                                    },
+                                    {
+                                        "text": "America/Rio_Branco",
+                                        "value": "America/Rio_Branco"
+                                    },
+                                    {
+                                        "text": "America/Rosario",
+                                        "value": "America/Rosario"
+                                    },
+                                    {
+                                        "text": "America/Santiago",
+                                        "value": "America/Santiago"
+                                    },
+                                    {
+                                        "text": "America/Santo_Domingo",
+                                        "value": "America/Santo_Domingo"
+                                    },
+                                    {
+                                        "text": "America/Sao_Paulo",
+                                        "value": "America/Sao_Paulo"
+                                    },
+                                    {
+                                        "text": "America/Scoresbysund",
+                                        "value": "America/Scoresbysund"
+                                    },
+                                    {
+                                        "text": "America/Shiprock",
+                                        "value": "America/Shiprock"
+                                    },
+                                    {
+                                        "text": "America/St_Johns",
+                                        "value": "America/St_Johns"
+                                    },
+                                    {
+                                        "text": "America/St_Kitts",
+                                        "value": "America/St_Kitts"
+                                    },
+                                    {
+                                        "text": "America/St_Lucia",
+                                        "value": "America/St_Lucia"
+                                    },
+                                    {
+                                        "text": "America/St_Thomas",
+                                        "value": "America/St_Thomas"
+                                    },
+                                    {
+                                        "text": "America/St_Vincent",
+                                        "value": "America/St_Vincent"
+                                    },
+                                    {
+                                        "text": "America/Swift_Current",
+                                        "value": "America/Swift_Current"
+                                    },
+                                    {
+                                        "text": "America/Tegucigalpa",
+                                        "value": "America/Tegucigalpa"
+                                    },
+                                    {
+                                        "text": "America/Thule",
+                                        "value": "America/Thule"
+                                    },
+                                    {
+                                        "text": "America/Thunder_Bay",
+                                        "value": "America/Thunder_Bay"
+                                    },
+                                    {
+                                        "text": "America/Tijuana",
+                                        "value": "America/Tijuana"
+                                    },
+                                    {
+                                        "text": "America/Tortola",
+                                        "value": "America/Tortola"
+                                    },
+                                    {
+                                        "text": "America/Vancouver",
+                                        "value": "America/Vancouver"
+                                    },
+                                    {
+                                        "text": "America/Whitehorse",
+                                        "value": "America/Whitehorse"
+                                    },
+                                    {
+                                        "text": "America/Winnipeg",
+                                        "value": "America/Winnipeg"
+                                    },
+                                    {
+                                        "text": "America/Yakutat",
+                                        "value": "America/Yakutat"
+                                    },
+                                    {
+                                        "text": "America/Yellowknife",
+                                        "value": "America/Yellowknife"
+                                    },
+                                    {
+                                        "text": "Antarctica/Casey",
+                                        "value": "Antarctica/Casey"
+                                    },
+                                    {
+                                        "text": "Antarctica/Davis",
+                                        "value": "Antarctica/Davis"
+                                    },
+                                    {
+                                        "text": "Antarctica/DumontDUrville",
+                                        "value": "Antarctica/DumontDUrville"
+                                    },
+                                    {
+                                        "text": "Antarctica/Mawson",
+                                        "value": "Antarctica/Mawson"
+                                    },
+                                    {
+                                        "text": "Antarctica/McMurdo",
+                                        "value": "Antarctica/McMurdo"
+                                    },
+                                    {
+                                        "text": "Antarctica/Palmer",
+                                        "value": "Antarctica/Palmer"
+                                    },
+                                    {
+                                        "text": "Antarctica/South_Pole",
+                                        "value": "Antarctica/South_Pole"
+                                    },
+                                    {
+                                        "text": "Antarctica/Syowa",
+                                        "value": "Antarctica/Syowa"
+                                    },
+                                    {
+                                        "text": "Antarctica/Vostok",
+                                        "value": "Antarctica/Vostok"
+                                    },
+                                    {
+                                        "text": "Arctic/Longyearbyen",
+                                        "value": "Arctic/Longyearbyen"
+                                    },
+                                    {
+                                        "text": "Asia/Aden",
+                                        "value": "Asia/Aden"
+                                    },
+                                    {
+                                        "text": "Asia/Almaty",
+                                        "value": "Asia/Almaty"
+                                    },
+                                    {
+                                        "text": "Asia/Amman",
+                                        "value": "Asia/Amman"
+                                    },
+                                    {
+                                        "text": "Asia/Anadyr",
+                                        "value": "Asia/Anadyr"
+                                    },
+                                    {
+                                        "text": "Asia/Aqtau",
+                                        "value": "Asia/Aqtau"
+                                    },
+                                    {
+                                        "text": "Asia/Aqtobe",
+                                        "value": "Asia/Aqtobe"
+                                    },
+                                    {
+                                        "text": "Asia/Ashgabat",
+                                        "value": "Asia/Ashgabat"
+                                    },
+                                    {
+                                        "text": "Asia/Baghdad",
+                                        "value": "Asia/Baghdad"
+                                    },
+                                    {
+                                        "text": "Asia/Bahrain",
+                                        "value": "Asia/Bahrain"
+                                    },
+                                    {
+                                        "text": "Asia/Baku",
+                                        "value": "Asia/Baku"
+                                    },
+                                    {
+                                        "text": "Asia/Bangkok",
+                                        "value": "Asia/Bangkok"
+                                    },
+                                    {
+                                        "text": "Asia/Beirut",
+                                        "value": "Asia/Beirut"
+                                    },
+                                    {
+                                        "text": "Asia/Bishkek",
+                                        "value": "Asia/Bishkek"
+                                    },
+                                    {
+                                        "text": "Asia/Brunei",
+                                        "value": "Asia/Brunei"
+                                    },
+                                    {
+                                        "text": "Asia/Calcutta",
+                                        "value": "Asia/Calcutta"
+                                    },
+                                    {
+                                        "text": "Asia/Choibalsan",
+                                        "value": "Asia/Choibalsan"
+                                    },
+                                    {
+                                        "text": "Asia/Chongqing",
+                                        "value": "Asia/Chongqing"
+                                    },
+                                    {
+                                        "text": "Asia/Colombo",
+                                        "value": "Asia/Colombo"
+                                    },
+                                    {
+                                        "text": "Asia/Damascus",
+                                        "value": "Asia/Damascus"
+                                    },
+                                    {
+                                        "text": "Asia/Dhaka",
+                                        "value": "Asia/Dhaka"
+                                    },
+                                    {
+                                        "text": "Asia/Dili",
+                                        "value": "Asia/Dili"
+                                    },
+                                    {
+                                        "text": "Asia/Dubai",
+                                        "value": "Asia/Dubai"
+                                    },
+                                    {
+                                        "text": "Asia/Dushanbe",
+                                        "value": "Asia/Dushanbe"
+                                    },
+                                    {
+                                        "text": "Asia/Gaza",
+                                        "value": "Asia/Gaza"
+                                    },
+                                    {
+                                        "text": "Asia/Harbin",
+                                        "value": "Asia/Harbin"
+                                    },
+                                    {
+                                        "text": "Asia/Hong_Kong",
+                                        "value": "Asia/Hong_Kong"
+                                    },
+                                    {
+                                        "text": "Asia/Hovd",
+                                        "value": "Asia/Hovd"
+                                    },
+                                    {
+                                        "text": "Asia/Irkutsk",
+                                        "value": "Asia/Irkutsk"
+                                    },
+                                    {
+                                        "text": "Asia/Istanbul",
+                                        "value": "Asia/Istanbul"
+                                    },
+                                    {
+                                        "text": "Asia/Jakarta",
+                                        "value": "Asia/Jakarta"
+                                    },
+                                    {
+                                        "text": "Asia/Jayapura",
+                                        "value": "Asia/Jayapura"
+                                    },
+                                    {
+                                        "text": "Asia/Jerusalem",
+                                        "value": "Asia/Jerusalem"
+                                    },
+                                    {
+                                        "text": "Asia/Kamchatka",
+                                        "value": "Asia/Kamchatka"
+                                    },
+                                    {
+                                        "text": "Asia/Karachi",
+                                        "value": "Asia/Karachi"
+                                    },
+                                    {
+                                        "text": "Asia/Kashgar",
+                                        "value": "Asia/Kashgar"
+                                    },
+                                    {
+                                        "text": "Asia/Krasnoyarsk",
+                                        "value": "Asia/Krasnoyarsk"
+                                    },
+                                    {
+                                        "text": "Asia/Kuala_Lumpur",
+                                        "value": "Asia/Kuala_Lumpur"
+                                    },
+                                    {
+                                        "text": "Asia/Kuching",
+                                        "value": "Asia/Kuching"
+                                    },
+                                    {
+                                        "text": "Asia/Kuwait",
+                                        "value": "Asia/Kuwait"
+                                    },
+                                    {
+                                        "text": "Asia/Macao",
+                                        "value": "Asia/Macao"
+                                    },
+                                    {
+                                        "text": "Asia/Macau",
+                                        "value": "Asia/Macau"
+                                    },
+                                    {
+                                        "text": "Asia/Magadan",
+                                        "value": "Asia/Magadan"
+                                    },
+                                    {
+                                        "text": "Asia/Makassar",
+                                        "value": "Asia/Makassar"
+                                    },
+                                    {
+                                        "text": "Asia/Manila",
+                                        "value": "Asia/Manila"
+                                    },
+                                    {
+                                        "text": "Asia/Muscat",
+                                        "value": "Asia/Muscat"
+                                    },
+                                    {
+                                        "text": "Asia/Nicosia",
+                                        "value": "Asia/Nicosia"
+                                    },
+                                    {
+                                        "text": "Asia/Novosibirsk",
+                                        "value": "Asia/Novosibirsk"
+                                    },
+                                    {
+                                        "text": "Asia/Omsk",
+                                        "value": "Asia/Omsk"
+                                    },
+                                    {
+                                        "text": "Asia/Oral",
+                                        "value": "Asia/Oral"
+                                    },
+                                    {
+                                        "text": "Asia/Phnom_Penh",
+                                        "value": "Asia/Phnom_Penh"
+                                    },
+                                    {
+                                        "text": "Asia/Pontianak",
+                                        "value": "Asia/Pontianak"
+                                    },
+                                    {
+                                        "text": "Asia/Qatar",
+                                        "value": "Asia/Qatar"
+                                    },
+                                    {
+                                        "text": "Asia/Qyzylorda",
+                                        "value": "Asia/Qyzylorda"
+                                    },
+                                    {
+                                        "text": "Asia/Riyadh",
+                                        "value": "Asia/Riyadh"
+                                    },
+                                    {
+                                        "text": "Asia/Saigon",
+                                        "value": "Asia/Saigon"
+                                    },
+                                    {
+                                        "text": "Asia/Sakhalin",
+                                        "value": "Asia/Sakhalin"
+                                    },
+                                    {
+                                        "text": "Asia/Samarkand",
+                                        "value": "Asia/Samarkand"
+                                    },
+                                    {
+                                        "text": "Asia/Seoul",
+                                        "value": "Asia/Seoul"
+                                    },
+                                    {
+                                        "text": "Asia/Shanghai",
+                                        "value": "Asia/Shanghai"
+                                    },
+                                    {
+                                        "text": "Asia/Singapore",
+                                        "value": "Asia/Singapore"
+                                    },
+                                    {
+                                        "text": "Asia/Taipei",
+                                        "value": "Asia/Taipei"
+                                    },
+                                    {
+                                        "text": "Asia/Tashkent",
+                                        "value": "Asia/Tashkent"
+                                    },
+                                    {
+                                        "text": "Asia/Tbilisi",
+                                        "value": "Asia/Tbilisi"
+                                    },
+                                    {
+                                        "text": "Asia/Tehran",
+                                        "value": "Asia/Tehran"
+                                    },
+                                    {
+                                        "text": "Asia/Thimphu",
+                                        "value": "Asia/Thimphu"
+                                    },
+                                    {
+                                        "text": "Asia/Tokyo",
+                                        "value": "Asia/Tokyo"
+                                    },
+                                    {
+                                        "text": "Asia/Ujung_Pandang",
+                                        "value": "Asia/Ujung_Pandang"
+                                    },
+                                    {
+                                        "text": "Asia/Ulaanbaatar",
+                                        "value": "Asia/Ulaanbaatar"
+                                    },
+                                    {
+                                        "text": "Asia/Urumqi",
+                                        "value": "Asia/Urumqi"
+                                    },
+                                    {
+                                        "text": "Asia/Vientiane",
+                                        "value": "Asia/Vientiane"
+                                    },
+                                    {
+                                        "text": "Asia/Vladivostok",
+                                        "value": "Asia/Vladivostok"
+                                    },
+                                    {
+                                        "text": "Asia/Yakutsk",
+                                        "value": "Asia/Yakutsk"
+                                    },
+                                    {
+                                        "text": "Asia/Yekaterinburg",
+                                        "value": "Asia/Yekaterinburg"
+                                    },
+                                    {
+                                        "text": "Asia/Yerevan",
+                                        "value": "Asia/Yerevan"
+                                    },
+                                    {
+                                        "text": "Atlantic/Azores",
+                                        "value": "Atlantic/Azores"
+                                    },
+                                    {
+                                        "text": "Atlantic/Bermuda",
+                                        "value": "Atlantic/Bermuda"
+                                    },
+                                    {
+                                        "text": "Atlantic/Canary",
+                                        "value": "Atlantic/Canary"
+                                    },
+                                    {
+                                        "text": "Atlantic/Cape_Verde",
+                                        "value": "Atlantic/Cape_Verde"
+                                    },
+                                    {
+                                        "text": "Atlantic/Faeroe",
+                                        "value": "Atlantic/Faeroe"
+                                    },
+                                    {
+                                        "text": "Atlantic/Jan_Mayen",
+                                        "value": "Atlantic/Jan_Mayen"
+                                    },
+                                    {
+                                        "text": "Atlantic/Madeira",
+                                        "value": "Atlantic/Madeira"
+                                    },
+                                    {
+                                        "text": "Atlantic/Reykjavik",
+                                        "value": "Atlantic/Reykjavik"
+                                    },
+                                    {
+                                        "text": "Atlantic/South_Georgia",
+                                        "value": "Atlantic/South_Georgia"
+                                    },
+                                    {
+                                        "text": "Atlantic/St_Helena",
+                                        "value": "Atlantic/St_Helena"
+                                    },
+                                    {
+                                        "text": "Atlantic/Stanley",
+                                        "value": "Atlantic/Stanley"
+                                    },
+                                    {
+                                        "text": "Australia/Adelaide",
+                                        "value": "Australia/Adelaide"
+                                    },
+                                    {
+                                        "text": "Australia/Brisbane",
+                                        "value": "Australia/Brisbane"
+                                    },
+                                    {
+                                        "text": "Australia/Broken_Hill",
+                                        "value": "Australia/Broken_Hill"
+                                    },
+                                    {
+                                        "text": "Australia/Darwin",
+                                        "value": "Australia/Darwin"
+                                    },
+                                    {
+                                        "text": "Australia/Hobart",
+                                        "value": "Australia/Hobart"
+                                    },
+                                    {
+                                        "text": "Australia/Lindeman",
+                                        "value": "Australia/Lindeman"
+                                    },
+                                    {
+                                        "text": "Australia/Lord_Howe",
+                                        "value": "Australia/Lord_Howe"
+                                    },
+                                    {
+                                        "text": "Australia/Melbourne",
+                                        "value": "Australia/Melbourne"
+                                    },
+                                    {
+                                        "text": "Australia/Perth",
+                                        "value": "Australia/Perth"
+                                    },
+                                    {
+                                        "text": "Australia/Sydney",
+                                        "value": "Australia/Sydney"
+                                    },
+                                    {
+                                        "text": "Europe/Amsterdam",
+                                        "value": "Europe/Amsterdam"
+                                    },
+                                    {
+                                        "text": "Europe/Andorra",
+                                        "value": "Europe/Andorra"
+                                    },
+                                    {
+                                        "text": "Europe/Athens",
+                                        "value": "Europe/Athens"
+                                    },
+                                    {
+                                        "text": "Europe/Belfast",
+                                        "value": "Europe/Belfast"
+                                    },
+                                    {
+                                        "text": "Europe/Belgrade",
+                                        "value": "Europe/Belgrade"
+                                    },
+                                    {
+                                        "text": "Europe/Berlin",
+                                        "value": "Europe/Berlin"
+                                    },
+                                    {
+                                        "text": "Europe/Bratislava",
+                                        "value": "Europe/Bratislava"
+                                    },
+                                    {
+                                        "text": "Europe/Brussels",
+                                        "value": "Europe/Brussels"
+                                    },
+                                    {
+                                        "text": "Europe/Bucharest",
+                                        "value": "Europe/Bucharest"
+                                    },
+                                    {
+                                        "text": "Europe/Budapest",
+                                        "value": "Europe/Budapest"
+                                    },
+                                    {
+                                        "text": "Europe/Chisinau",
+                                        "value": "Europe/Chisinau"
+                                    },
+                                    {
+                                        "text": "Europe/Copenhagen",
+                                        "value": "Europe/Copenhagen"
+                                    },
+                                    {
+                                        "text": "Europe/Dublin",
+                                        "value": "Europe/Dublin"
+                                    },
+                                    {
+                                        "text": "Europe/Gibraltar",
+                                        "value": "Europe/Gibraltar"
+                                    },
+                                    {
+                                        "text": "Europe/Helsinki",
+                                        "value": "Europe/Helsinki"
+                                    },
+                                    {
+                                        "text": "Europe/Istanbul",
+                                        "value": "Europe/Istanbul"
+                                    },
+                                    {
+                                        "text": "Europe/Kaliningrad",
+                                        "value": "Europe/Kaliningrad"
+                                    },
+                                    {
+                                        "text": "Europe/Kiev",
+                                        "value": "Europe/Kiev"
+                                    },
+                                    {
+                                        "text": "Europe/Lisbon",
+                                        "value": "Europe/Lisbon"
+                                    },
+                                    {
+                                        "text": "Europe/Ljubljana",
+                                        "value": "Europe/Ljubljana"
+                                    },
+                                    {
+                                        "text": "Europe/London",
+                                        "value": "Europe/London"
+                                    },
+                                    {
+                                        "text": "Europe/Luxembourg",
+                                        "value": "Europe/Luxembourg"
+                                    },
+                                    {
+                                        "text": "Europe/Madrid",
+                                        "value": "Europe/Madrid"
+                                    },
+                                    {
+                                        "text": "Europe/Malta",
+                                        "value": "Europe/Malta"
+                                    },
+                                    {
+                                        "text": "Europe/Minsk",
+                                        "value": "Europe/Minsk"
+                                    },
+                                    {
+                                        "text": "Europe/Monaco",
+                                        "value": "Europe/Monaco"
+                                    },
+                                    {
+                                        "text": "Europe/Moscow",
+                                        "value": "Europe/Moscow"
+                                    },
+                                    {
+                                        "text": "Europe/Nicosia",
+                                        "value": "Europe/Nicosia"
+                                    },
+                                    {
+                                        "text": "Europe/Oslo",
+                                        "value": "Europe/Oslo"
+                                    },
+                                    {
+                                        "text": "Europe/Paris",
+                                        "value": "Europe/Paris"
+                                    },
+                                    {
+                                        "text": "Europe/Prague",
+                                        "value": "Europe/Prague"
+                                    },
+                                    {
+                                        "text": "Europe/Riga",
+                                        "value": "Europe/Riga"
+                                    },
+                                    {
+                                        "text": "Europe/Rome",
+                                        "value": "Europe/Rome"
+                                    },
+                                    {
+                                        "text": "Europe/Samara",
+                                        "value": "Europe/Samara"
+                                    },
+                                    {
+                                        "text": "Europe/San_Marino",
+                                        "value": "Europe/San_Marino"
+                                    },
+                                    {
+                                        "text": "Europe/Sarajevo",
+                                        "value": "Europe/Sarajevo"
+                                    },
+                                    {
+                                        "text": "Europe/Simferopol",
+                                        "value": "Europe/Simferopol"
+                                    },
+                                    {
+                                        "text": "Europe/Skopje",
+                                        "value": "Europe/Skopje"
+                                    },
+                                    {
+                                        "text": "Europe/Sofia",
+                                        "value": "Europe/Sofia"
+                                    },
+                                    {
+                                        "text": "Europe/Stockholm",
+                                        "value": "Europe/Stockholm"
+                                    },
+                                    {
+                                        "text": "Europe/Tallinn",
+                                        "value": "Europe/Tallinn"
+                                    },
+                                    {
+                                        "text": "Europe/Tirane",
+                                        "value": "Europe/Tirane"
+                                    },
+                                    {
+                                        "text": "Europe/Uzhgorod",
+                                        "value": "Europe/Uzhgorod"
+                                    },
+                                    {
+                                        "text": "Europe/Vaduz",
+                                        "value": "Europe/Vaduz"
+                                    },
+                                    {
+                                        "text": "Europe/Vatican",
+                                        "value": "Europe/Vatican"
+                                    },
+                                    {
+                                        "text": "Europe/Vienna",
+                                        "value": "Europe/Vienna"
+                                    },
+                                    {
+                                        "text": "Europe/Vilnius",
+                                        "value": "Europe/Vilnius"
+                                    },
+                                    {
+                                        "text": "Europe/Warsaw",
+                                        "value": "Europe/Warsaw"
+                                    },
+                                    {
+                                        "text": "Europe/Zagreb",
+                                        "value": "Europe/Zagreb"
+                                    },
+                                    {
+                                        "text": "Europe/Zaporozhye",
+                                        "value": "Europe/Zaporozhye"
+                                    },
+                                    {
+                                        "text": "Europe/Zurich",
+                                        "value": "Europe/Zurich"
+                                    },
+                                    {
+                                        "text": "Indian/Antananarivo",
+                                        "value": "Indian/Antananarivo"
+                                    },
+                                    {
+                                        "text": "Indian/Chagos",
+                                        "value": "Indian/Chagos"
+                                    },
+                                    {
+                                        "text": "Indian/Christmas",
+                                        "value": "Indian/Christmas"
+                                    },
+                                    {
+                                        "text": "Indian/Comoro",
+                                        "value": "Indian/Comoro"
+                                    },
+                                    {
+                                        "text": "Indian/Kerguelen",
+                                        "value": "Indian/Kerguelen"
+                                    },
+                                    {
+                                        "text": "Indian/Mahe",
+                                        "value": "Indian/Mahe"
+                                    },
+                                    {
+                                        "text": "Indian/Maldives",
+                                        "value": "Indian/Maldives"
+                                    },
+                                    {
+                                        "text": "Indian/Mauritius",
+                                        "value": "Indian/Mauritius"
+                                    },
+                                    {
+                                        "text": "Indian/Mayotte",
+                                        "value": "Indian/Mayotte"
+                                    },
+                                    {
+                                        "text": "Indian/Reunion",
+                                        "value": "Indian/Reunion"
+                                    },
+                                    {
+                                        "text": "Pacific/Apia",
+                                        "value": "Pacific/Apia"
+                                    },
+                                    {
+                                        "text": "Pacific/Auckland",
+                                        "value": "Pacific/Auckland"
+                                    },
+                                    {
+                                        "text": "Pacific/Chatham",
+                                        "value": "Pacific/Chatham"
+                                    },
+                                    {
+                                        "text": "Pacific/Easter",
+                                        "value": "Pacific/Easter"
+                                    },
+                                    {
+                                        "text": "Pacific/Efate",
+                                        "value": "Pacific/Efate"
+                                    },
+                                    {
+                                        "text": "Pacific/Enderbury",
+                                        "value": "Pacific/Enderbury"
+                                    },
+                                    {
+                                        "text": "Pacific/Fakaofo",
+                                        "value": "Pacific/Fakaofo"
+                                    },
+                                    {
+                                        "text": "Pacific/Fiji",
+                                        "value": "Pacific/Fiji"
+                                    },
+                                    {
+                                        "text": "Pacific/Funafuti",
+                                        "value": "Pacific/Funafuti"
+                                    },
+                                    {
+                                        "text": "Pacific/Galapagos",
+                                        "value": "Pacific/Galapagos"
+                                    },
+                                    {
+                                        "text": "Pacific/Gambier",
+                                        "value": "Pacific/Gambier"
+                                    },
+                                    {
+                                        "text": "Pacific/Guadalcanal",
+                                        "value": "Pacific/Guadalcanal"
+                                    },
+                                    {
+                                        "text": "Pacific/Guam",
+                                        "value": "Pacific/Guam"
+                                    },
+                                    {
+                                        "text": "Pacific/Honolulu",
+                                        "value": "Pacific/Honolulu"
+                                    },
+                                    {
+                                        "text": "Pacific/Johnston",
+                                        "value": "Pacific/Johnston"
+                                    },
+                                    {
+                                        "text": "Pacific/Kosrae",
+                                        "value": "Pacific/Kosrae"
+                                    },
+                                    {
+                                        "text": "Pacific/Kwajalein",
+                                        "value": "Pacific/Kwajalein"
+                                    },
+                                    {
+                                        "text": "Pacific/Majuro",
+                                        "value": "Pacific/Majuro"
+                                    },
+                                    {
+                                        "text": "Pacific/Midway",
+                                        "value": "Pacific/Midway"
+                                    },
+                                    {
+                                        "text": "Pacific/Nauru",
+                                        "value": "Pacific/Nauru"
+                                    },
+                                    {
+                                        "text": "Pacific/Niue",
+                                        "value": "Pacific/Niue"
+                                    },
+                                    {
+                                        "text": "Pacific/Noumea",
+                                        "value": "Pacific/Noumea"
+                                    },
+                                    {
+                                        "text": "Pacific/Pago_Pago",
+                                        "value": "Pacific/Pago_Pago"
+                                    },
+                                    {
+                                        "text": "Pacific/Palau",
+                                        "value": "Pacific/Palau"
+                                    },
+                                    {
+                                        "text": "Pacific/Pitcairn",
+                                        "value": "Pacific/Pitcairn"
+                                    },
+                                    {
+                                        "text": "Pacific/Ponape",
+                                        "value": "Pacific/Ponape"
+                                    },
+                                    {
+                                        "text": "Pacific/Port_Moresby",
+                                        "value": "Pacific/Port_Moresby"
+                                    },
+                                    {
+                                        "text": "Pacific/Rarotonga",
+                                        "value": "Pacific/Rarotonga"
+                                    },
+                                    {
+                                        "text": "Pacific/Saipan",
+                                        "value": "Pacific/Saipan"
+                                    },
+                                    {
+                                        "text": "Pacific/Tahiti",
+                                        "value": "Pacific/Tahiti"
+                                    },
+                                    {
+                                        "text": "Pacific/Tarawa",
+                                        "value": "Pacific/Tarawa"
+                                    },
+                                    {
+                                        "text": "Pacific/Tongatapu",
+                                        "value": "Pacific/Tongatapu"
+                                    },
+                                    {
+                                        "text": "Pacific/Truk",
+                                        "value": "Pacific/Truk"
+                                    },
+                                    {
+                                        "text": "Pacific/Wake",
+                                        "value": "Pacific/Wake"
+                                    },
+                                    {
+                                        "text": "Pacific/Wallis",
+                                        "value": "Pacific/Wallis"
+                                    },
+                                    {
+                                        "text": "Pacific/Yap",
+                                        "value": "Pacific/Yap"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "dst": {
+                        "text": "Daylight Savings",
+                        "data": {
+                            "summer_time": {
+                                "text": "Summer Time",
+                                "type": "select",
+                                "value": "automatic",
+                                "options": [
+                                    {
+                                        "text": "Automatic",
+                                        "value": "automatic"
+                                    },
+                                    {
+                                        "text": "Yes",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "No",
+                                        "value": false
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "ntp": {
+                        "text": "Network Time Protocol",
+                        "data": {
+                            "primary_server": {
+                                "text": "Primary Sever",
+                                "tooltip": "Choose the primary SNTP server that the phone obtains the time from.",
+                                "type": "text",
+                                "value": "0.pool.ntp.org"
+                            },
+                            "secondary_server": {
+                                "text": "Secondary Sever",
+                                "tooltip": "Choose the secondary SNTP server that the phone obtains the time from.",
+                                "type": "text",
+                                "value": "3.pool.ntp.org"
+                            }
+                        }
+                    }
+                }
+            },
+            "settings": {
+                "text": "Settings",
+                "data": {
+                    "http": {
+                        "text": "HTTP",
+                        "data": {
+                            "http": {
+                                "text": "HTTP",
+                                "tooltip": "Enables or disables the user to access web user interface of the IP phone using the HTTP protocol.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "Disabled",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "Enabled",
+                                        "value": true
+                                    }
+                                ]
+                            },
+                            "https": {
+                                "text": "HTTPS",
+                                "tooltip": "Enables or disables the user to access web user interface of the IP phone using the HTTPS protocol.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "Disabled",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "Enabled",
+                                        "value": true
+                                    }
+                                ]
+                            }
+                        },
+                        "hidden": true
+                    },
+                    "admin": {
+                        "text": "Admin",
+                        "data": {
+                            "password": {
+                                "text": "Password",
+                                "type": "password",
+                                "value": "2600"
+                            },
+                            "username": {
+                                "text": "Username",
+                                "type": "text",
+                                "value": "admin"
+                            }
+                        }
+                    },
+                    "urls": {
+                        "text": "White Labeling URLs",
+                        "data": {
+                            "provisioner": {
+                                "text": "Provisioning URL",
+                                "tooltip": "Replaces default Provisioning URL with a custom one for white labeling.",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "firmware": {
+                                "text": "Firmware URL",
+                                "tooltip": "Replaces default Firmware URL with a custom one.",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "use_https": {
+                                "text": "Use HTTP or HTTPS",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "HTTPS",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "HTTP",
+                                        "value": false
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "advanced": {
+                        "text": "Advanced",
+                        "data": {
+                            "udp_keep_alive_interval": {
+                                "text": "Keep Alive Interval",
+                                "type": "text",
+                                "tooltip": "The frequency (in seconds) to set a keep-alive packet.",
+                                "value": "30"
+                            }
+                        }
+                    },
+                    "dialplan": {
+                        "text": "Dialplan",
+                        "data": {
+                            "digitmap": {
+                                "text": "Digitmap",
+                                "type": "text",
+                                "tooltip": "All digits that are entered on the phone will be compared with the digitmap specified. If the digits match a digitmap pattern, the call will be automatically placed, without the Send key being pressed.",
+                                "value": "{[2-9]11|0+|xxxx+|011xxx+|[1][2-9]xx[2-9]xxxxxx|[2-9]xx[2-9]xxxxxx|*xx+|**xx+|+x+}"
+                            },
+                            "digitmap_timeout": {
+                                "text": "Digitmap Timeout",
+                                "type": "text",
+                                "tooltip": "This setting controls how long, in seconds, each pattern in the digitmap is applied.",
+                                "value": "3"
+                            }
+                        }
+                    },
+                    "firmware": {
+                        "text": "Firmware",
+                        "data": {
+                            "version": {
+                                "text": "Select Firmware Version",
+                                "type": "select",
+                                "value": "1_0_16_2",
+                                "options": [
+                                    {
+                                        "text": "Use own firmware",
+                                        "value": "none"
+                                    },
+                                    {
+                                        "text": "1.0.16.2",
+                                        "value": "1_0_16_2"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "network": {
+                "text": "Network",
+                "data": {
+                    "ipaddr": {
+                        "text": "IP Configuration",
+                        "data": {
+                            "dhcp": {
+                                "text": "IP Address Mode",
+                                "type": "select",
+                                "value": true,
+                                "options": [
+                                    {
+                                        "text": "DHCP",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "Static",
+                                        "value": false
+                                    }
+                                ]
+                            },
+                            "static_ip": {
+                                "text": "IP Address",
+                                "tooltip": "The IPv4/IPv6 address when the IP address mode is configured 'static'.",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "static_netmask": {
+                                "text": "Netmask",
+                                "tooltip": "The IPv4/IPv6 subnet mask when the IP address mode is configured 'static'.",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "static_gateway": {
+                                "text": "Gateway",
+                                "tooltip": "The IPv4/IPv6 default gateway when the IP address mode is configured 'static'.",
+                                "type": "text",
+                                "value": ""
+                            }
+                        }
+                    },
+                    "dns": {
+                        "text": "DNS",
+                        "data": {
+                            "primary_server": {
+                                "text": "Primary server",
+                                "tooltip": "The primary DNS server used when the IP address mode is configured 'static'.",
+                                "type": "text",
+                                "value": ""
+                            },
+                            "backup_server": {
+                                "text": "Backup server",
+                                "tooltip": "The secondary DNS server used when the IP address mode is configured 'static'.",
+                                "type": "text",
+                                "value": ""
+                            }
+                        }
+                    },
+                    "vlan": {
+                        "text": "VLAN",
+                        "data": {
+                            "voip_enable": {
+                                "text": "VOIP VLAN Enabled",
+                                "tooltip": "It enables or disables VLAN for the Internet (WAN) port.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "Disable",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "Enable",
+                                        "value": true
+                                    }
+                                ],
+                                "hidden": true
+                            },
+                            "voip_id": {
+                                "text": "VOIP VLAN ID",
+                                "tooltip": "The VLAN ID for the Internet (WAN) port when enabled, should be a value between 1 and 4094.",
+                                "type": "text",
+                                "value": "",
+                                "hidden": true
+                            },
+                            "pc_enable": {
+                                "text": "PC VLAN Enabled",
+                                "tooltip": "It enables or disables VLAN for the PC (LAN) port.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "Disable",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "Enable",
+                                        "value": true
+                                    }
+                                ],
+                                "hidden": true
+                            },
+                            "pc_id": {
+                                "text": "PC VLAN ID",
+                                "tooltip": "The VLAN ID for the PC (LAN) port when enabled, should be a value between 1 and 4094.",
+                                "type": "text",
+                                "value": "",
+                                "hidden": true
+                            }
+                        },
+                        "hidden": true
+                    },
+                    "rtp": {
+                        "text": "RTP Ports",
+                        "data": {
+                            "min_port": {
+                                "text": "Minimum",
+                                "tooltip": "The minimum local RTP port, should be a value between 1042 and 65535.",
+                                "type": "text",
+                                "value": "11780"
+                            },
+                            "max_port": {
+                                "text": "Maximum",
+                                "tooltip": "The maximum local RTP port, should be a value between 1042 and 65535.",
+                                "type": "text",
+                                "value": "11800"
+                            },
+                            "dscp": {
+                                "text": "DSCP",
+                                "tooltip": "The QOS DSCP for voice packets (RTP), the default is Expedited Forward (46).",
+                                "type": "text",
+                                "value": "46"
+                            }
+                        }
+                    }
+                }
+            },
+            "preferences": {
+                "text": "Preferences",
+                "data": {
+                    "hold_alert": {
+                        "text": "Hold Alert",
+                        "data": {
+                            "enabled": {
+                                "text": "Play Tone",
+                                "tooltip": "Enables or disables the phone to play a warning tone when there is a call on hold.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "No",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "Yes",
+                                        "value": true
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "auto_answer": {
+                        "text": "Auto Answer",
+                        "data": {
+                            "allow": {
+                                "text": "Allow",
+                                "tooltip": "Enables or disables the automatical answering of incoming call after one ring.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "Yes",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "No",
+                                        "value": false
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "intercom": {
+                        "text": "Intercom",
+                        "data": {
+                            "by_call_info": {
+                                "text": "Auto Answer by Call-Info",
+                                "type": "select",
+                                "value": true,
+                                "options": [
+                                    {
+                                        "text": "Yes",
+                                        "value": true
+                                    },
+                                    {
+                                        "text": "No",
+                                        "value": false
+                                    }
+                                ]
+                            },
+                            "barge": {
+                                "text": "Barge",
+                                "tooltip": "Enables or disables the phone to automatically answer an incoming intercom call while there is already an active call.",
+                                "type": "select",
+                                "value": false,
+                                "options": [
+                                    {
+                                        "text": "No",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "Yes",
+                                        "value": true
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "jitter_buffer": {
+                        "text": "Jitter Buffer",
+                        "data": {
+                            "type": {
+                                "text": "Type",
+                                "tooltip": "Type of Jitter Buffer.",
+                                "type": "select",
+                                "value": 1,
+                                "options": [
+                                    {
+                                        "text": "Fixed",
+                                        "value": 0
+                                    },
+                                    {
+                                        "text": "Adaptive",
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            "length": {
+                                "text": "Length",
+                                "tooltip": "Jitter Buffer Length.",
+                                "type": "select",
+                                "value": 1,
+                                "options": [
+                                    {
+                                        "text": "Low",
+                                        "value": 0
+                                    },
+                                    {
+                                        "text": "Medium",
+                                        "value": 1
+                                    },
+                                    {
+                                        "text": "High",
+                                        "value": 2
+                                    },
+                                    {
+                                        "text": "400ms",
+                                        "value": 3
+                                    },
+                                    {
+                                        "text": "500ms",
+                                        "value": 4
+                                    },
+                                    {
+                                        "text": "600ms",
+                                        "value": 5
+                                    },
+                                    {
+                                        "text": "700ms",
+                                        "value": 6
+                                    },
+                                    {
+                                        "text": "800ms",
+                                        "value": 7
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "call_waiting": {
+                        "text": "Call Waiting",
+                        "data": {
+                            "enabled": {
+                                "text": "Allow",
+                                "tooltip": "Enables or disables call waiting feature.",
+                                "type": "select",
+                                "value": 0,
+                                "options": [
+                                    {
+                                        "text": "Yes",
+                                        "value": 0
+                                    },
+                                    {
+                                        "text": "No",
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            "caller_id": {
+                                "text": "Caller ID",
+                                "tooltip": "Enables or disables call waiting ID feature.",
+                                "type": "select",
+                                "value": 0,
+                                "options": [
+                                    {
+                                        "text": "Yes",
+                                        "value": 0
+                                    },
+                                    {
+                                        "text": "No",
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            "tone": {
+                                "text": "Play Tone",
+                                "tooltip": "Enables or disables the phone to play the call waiting tone when the phone receives an incoming call during a call.",
+                                "type": "select",
+                                "value": 0,
+                                "options": [
+                                    {
+                                        "text": "Yes",
+                                        "value": 0
+                                    },
+                                    {
+                                        "text": "No",
+                                        "value": 1
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "hook_flash": {
+                        "text": "Hook Flash",
+                        "data": {
+                            "enabled": {
+                                "text": "Enabled",
+                                "tooltip": "Enables or disables Hook Flash feature.",
+                                "type": "select",
+                                "value": true,
+                                "options": [
+                                    {
+                                        "text": "No",
+                                        "value": false
+                                    },
+                                    {
+                                        "text": "Yes",
+                                        "value": true
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "line_keys": {
+                "iterate": 0
+            },
+            "feature_keys": {
+                "iterate": 0
+            },
+            "combo_keys": {
+                "iterate": 0
+            }
+        },
+        "cluster": {
+            "lines": {
+                "sip": {
+                    "primary_server_address": "us-central.p.zswitch.net",
+                    "primary_server_port": "0",
+                    "secondary_server_address": "us-west.p.zswitch.net",
+                    "secondary_server_port": "0"
+                }
+            }
+        },
+        "settings": {
+            "lines": [
+                {
+                    "basic": {
+                        "enable": true,
+                        "transport": "dns",
+                        "expire": "360",
+                        "voicemail": "*97"
+                    },
+                    "sip": {
+                        "primary_server_port": "0",
+                        "secondary_server_port": "0",
+                        "use_geoip": false,
+                        "primary_server_address": "us-central.p.zswitch.net",
+                        "secondary_server_address": "us-west.p.zswitch.net"
+                    },
+                    "advanced": {
+                        "srtp": 0,
+                        "udp_keep_alive": true
+                    },
+                    "dtmf_method": {
+                        "1": 101,
+                        "2": 101,
+                        "3": 101
+                    }
+                },
+                {
+                    "basic": {
+                        "enable": true,
+                        "transport": "dns",
+                        "expire": "360",
+                        "voicemail": "*97"
+                    },
+                    "sip": {
+                        "primary_server_port": "0",
+                        "secondary_server_port": "0",
+                        "use_geoip": false,
+                        "primary_server_address": "us-central.p.zswitch.net",
+                        "secondary_server_address": "us-west.p.zswitch.net"
+                    },
+                    "advanced": {
+                        "srtp": 0,
+                        "udp_keep_alive": true
+                    },
+                    "dtmf_method": {
+                        "1": 101,
+                        "2": 101,
+                        "3": 101
+                    }
+                }
+            ],
+            "codecs": [
+                {
+                    "audio": {
+                        "primary_codec": "pcmu",
+                        "secondary_codec": "none",
+                        "tertiary_codec": "none",
+                        "quaternary_codec": "none"
+                    }
+                },
+                {
+                    "audio": {
+                        "primary_codec": "pcmu",
+                        "secondary_codec": "none",
+                        "tertiary_codec": "none",
+                        "quaternary_codec": "none"
+                    }
+                }
+            ],
+            "datetime": {
+                "time": {
+                    "hour_24": false,
+                    "timezone": "America/Los_Angeles"
+                },
+                "dst": {
+                    "summer_time": "automatic"
+                },
+                "ntp": {
+                    "primary_server": "0.pool.ntp.org",
+                    "secondary_server": "3.pool.ntp.org"
+                }
+            },
+            "settings": {
+                "http": {
+                    "http": false,
+                    "https": false
+                },
+                "admin": {
+                    "password": "2600",
+                    "username": "admin"
+                },
+                "urls": {
+                    "use_https": false
+                },
+                "advanced": {
+                    "udp_keep_alive_interval": "30"
+                },
+                "dialplan": {
+                    "digitmap": "{[2-9]11|0+|xxxx+|011xxx+|[1][2-9]xx[2-9]xxxxxx|[2-9]xx[2-9]xxxxxx|*xx+|**xx+|+x+}",
+                    "digitmap_timeout": "3"
+                },
+                "firmware": {
+                    "version": "1_0_16_2"
+                }
+            },
+            "network": {
+                "ipaddr": {
+                    "dhcp": true
+                },
+                "dns": [],
+                "vlan": {
+                    "voip_enable": false,
+                    "pc_enable": false
+                },
+                "rtp": {
+                    "min_port": "11780",
+                    "max_port": "11800",
+                    "dscp": "46"
+                }
+            },
+            "preferences": {
+                "hold_alert": {
+                    "enabled": false
+                },
+                "auto_answer": {
+                    "allow": false
+                },
+                "intercom": {
+                    "by_call_info": true,
+                    "barge": false
+                },
+                "jitter_buffer": {
+                    "type": 1,
+                    "length": 1
+                },
+                "call_waiting": {
+                    "enabled": 0,
+                    "caller_id": 0,
+                    "tone": 0
+                },
+                "hook_flash": {
+                    "enabled": true
+                }
+            }
+        }
+    },
+    "request_id": "5fd05276-b86a-4a6a-9818-4a12f3b1ad73"
+}
