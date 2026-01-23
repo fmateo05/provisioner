@@ -19,6 +19,6 @@ $otf_couch_port = '8000';
 $otf_conn = "http://" . $otf_couch_host . ':' . $otf_couch_port  . '/v2/';
 $conn = "http://" . $couch_user . ':' . $couch_pass . '@' . $couch_host . ':' . $couch_port ;
 
-
+$outbound_proxy_primary = 'proxy.sip.domain.tld'
 
 ?>
