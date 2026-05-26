@@ -2,7 +2,7 @@
 
 define('__ROOT__', dirname(dirname(__FILE__)));
 
-require_once('/var/www/html/env.php');
+require_once('/var/www/env.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
@@ -31,13 +31,13 @@ $lsddir = '/var/www/html/provisioner/api/devices/' . $account . '/' ;
 $initial_data = '{ "data": [] }';
 
 
-if(!file_exists($lsddir)) { 
+if(!file_exists($lsddir)) {
   shell_exec('mkdir -p ' . $lsddir);
 //	if(!file_exists($lsddir . 'devices.json')){
-	
+
 	shell_exec('touch ' . $lsddir . 'devices.json');
 file_put_contents($lsddir .'devices.json', $initial_data);
-	
+
 //	}
 }
 
@@ -52,12 +52,12 @@ $cmd_json_get_devices = 'curl -s -H "Content-Type: application/json" -H "X-Auth-
 
 if ($requestMethod === 'GET') {
 /*
-  if(!file_exists($lsddir)) { 
+  if(!file_exists($lsddir)) {
       shell_exec('mkdir -p ' . $lsddir);
 	if(!file_exists($lsddir . 'devices.json')){
-	
+
            file_put_contents($lsddir .'devices.json', $initial_data);
-	
+
 	}
 }
 	*/
@@ -120,9 +120,9 @@ $brand[$i] = $device_data_decoded[$i]['data']['provision']['endpoint_brand'];
 $family[$i] = $device_data_decoded[$i]['data']['provision']['endpoint_family'];
 $model[$i]  = $device_data_decoded[$i]['data']['provision']['endpoint_model'];
 
-if (empty($mac_address[$i]) && empty($name[$i])  && empty($brand[$i]) && empty($family[$i]) && empty($model[$i]) ) {
+if (empty($mac_address[$i]) && empty($brand[$i]) && empty($family[$i]) && empty($model[$i]) ) {
 
-	$i++;
+//	$i++;
 } else if($device_data_decoded[$i]['data']['device_type'] != 'sip_device'){
 	$i++;
 } else {
@@ -139,9 +139,18 @@ file_put_contents($macfile[$i], json_encode($phpmac,true)) ;
 
 }
 
-$modified_json = json_encode($phpArray,true);
+if(empty($devices_decoded_data['data'])) {
 
+$modified_json = $initial_data ;
 file_put_contents($lsddir .'devices.json', $modified_json);
+
+} else {
+
+$modified_json = json_encode($phpArray,true);
+file_put_contents($lsddir .'devices.json', $modified_json);
+
+}
+
 
 
 
@@ -199,10 +208,10 @@ $decodedData['data'][] = $newData  ;
 
 $modifiedJson = json_encode($decodedData,JSON_PRETTY_PRINT);
 
-//shell_exec($cmd_json_put_dev); 
+//shell_exec($cmd_json_put_dev);
 $lsddir = '/var/www/html/provisioner/api/devices/' . $account . '/' ;
 /*
-if(!file_exists($lsddir)) { 
+if(!file_exists($lsddir)) {
   shell_exec('mkdir -p ' . $lsddir);
 }
 */
@@ -226,7 +235,7 @@ $modifiedJsonDev = json_encode($dev_decodedData,true);
 $cmd_put_devices= 'curl -s -H "Content-Type: application/json" -H "X-Auth-Token: '. $json_auth['auth_token']. '" -X PUT  ' . $otf_conn . 'accounts/' . $account . '/devices/' . ' -d ' . "'" . $modifiedJsonDev . "'"  ;
 
 file_put_contents("/var/www/html/provisioner-put.log",print_r($cmd_put_devices,true),FILE_APPEND);
-//shell_exec($cmd_put_devices); 
+//shell_exec($cmd_put_devices);
 
 
 } elseif ($requestMethod === 'DELETE') {
@@ -234,18 +243,3 @@ file_put_contents("/var/www/html/provisioner-put.log",print_r($cmd_put_devices,t
 } else {
     echo "This is an unsupported request method: " . $requestMethod;
 }
-
-
-
-
-
-
-
-//$sql_device = "SELECT device_uuid FROM v_devices WHERE device_address='". $mac_address ."';";
-//$device_uuid = shell_exec("sudo psql -qtAX -d " . '"' . $dbconn . '" -c ' . '"' . $sql_device . '"'  );
-//$device_id = preg_replace('-','', $device_uuid);
-
-//$sql_device = "SELECT domain_uuid FROM v_devices WHERE device_uuid='". $device_uuid ."';";
-//$account = shell_exec("sudo psql -qtAX -d " . '"' . $dbconn . '" -c ' . '"' . $sql_device . '"'  );
-
-//file_put_contents("/var/www/html/provisioner.log",print_r($response,true),FILE_APPEND);
