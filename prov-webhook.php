@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 define('__ROOT__', dirname(dirname(__FILE__)));
 
@@ -204,9 +204,8 @@ $cmd_json_patch = 'curl -s -H "Content-Type: application/json" -H "X-Auth-Token:
 // good $sql = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES('". $account_uuid ."', '" . $prov_domain  .  "', true , '". $request_data_account['name'] ."');";
         $sql = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES($1, $2, $3, $4);";
         
-        safe_sql_exec($conn_pg, $sql,[$account_uuid, $prov_domain,  true,$request_data_account['name']]);
-        
-        
+        safe_sql_exec($conn_pg, $sql,[$account_uuid, $prov_domain,'true',$request_data_account['name']]);
+            
         
         
 	$res_check = safe_sql_exec($conn_pg, $sql_settings_prov_check, [$account_uuid, 'provision', 'enabled']);
@@ -229,7 +228,7 @@ $settings_to_insert = [
     ['grandstream_phonebook_download', 'text', '3', 0, 'true'],
     ['grandstream_phonebook_interval', 'text', '5', 0, 'true'],
     ['contact_grandstream', 'boolean', '1', 0, 'true'],
-    ['yealink_provision_url', 'text', 'https://' . $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
+    ['yealink_provision_url', 'text', $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
     ['yealink_trust_ctrl', 'text', '0', 0, 'true'],
     ['yealink_trust_certificates', 'text', '0', 0, 'true']
 ];
@@ -257,55 +256,10 @@ foreach ($settings_to_insert as $set) {
 //	shell_exec("sudo psql -d " . '"' . $dbconn . '" -c ' . '"' . $sql . '"'  );
 
 	} else if ($json['action'] === 'doc_edited'&& $json['type'] === 'account'){
-            
-        $res_check = safe_sql_exec($conn_pg, $sql_settings_prov_check, [$account_uuid, 'provision', 'enabled']);
-	//file_put_contents("/var/www/html/webhook-data.log",$sql_settings_check, FILE_APPEND);
-
-	if (pg_num_rows($res_check) == 0) {
-$sql_insert_setting = "INSERT INTO public.v_domain_settings 
-    (domain_uuid, domain_setting_uuid, domain_setting_category, domain_setting_subcategory, domain_setting_name, domain_setting_value, domain_setting_order, domain_setting_enabled, domain_setting_description) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);";
-
-// Agrupamos tus configuraciones en una matriz limpia
-$settings_to_insert = [
-    ['http_auth_type', 'text', 'basic', 0, 'true'],
-    ['enabled', 'boolean', 'true', 0, 'true'],
-    ['http_auth_enabled', 'boolean', 'true', 0, 'true'],
-    ['http_auth_username', 'text', $account_id, 0, 'true'],
-    ['http_auth_password', 'array', $other_uuid, 0, 'true'],
-    ['grandstream_config_server_path', 'text', $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
-    ['grandstream_phonebook_xml_server_path', 'text', $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
-    ['grandstream_phonebook_download', 'text', '3', 0, 'true'],
-    ['grandstream_phonebook_interval', 'text', '5', 0, 'true'],
-    ['contact_grandstream', 'boolean', '1', 0, 'true'],
-    ['yealink_provision_url', 'text', 'https://' . $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
-    ['yealink_trust_ctrl', 'text', '0', 0, 'true'],
-    ['yealink_trust_certificates', 'text', '0', 0, 'true']
-];
-
-// Recorremos la matriz y ejecutamos con el Helper seguro
-foreach ($settings_to_insert as $set) {
-    $params = [
-        $account_uuid,       // $1
-        new_uuid(),          // $2
-        'provision',         // $3 (category)
-        $set[0],             // $4 (subcategory)
-        $set[1],             // $5 (name)
-        $set[2],             // $6 (value)
-        $set[3],             // $7 (order)
-        $set[4],             // $8 (enabled)
-        'added from webhook' // $9 (description)
-    ];
-    
-    safe_sql_exec($conn_pg, $sql_insert_setting, $params);
-}
-    
-            
-            
 //	$sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_name='". $prov_domain ."';";
         $sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_uuid = $1;";
 //	$query_account =  trim(shell_exec("sudo psql -qtAX -d " . '"' . $dbconn . '" -c ' . '"' . $sel_query_acc . '"'  ));
-        $query_account =  safe_sql_exec($conn_pg, $sel_query_acc, [$account_uuid]);
+        $query_account =  safe_sql_exec($conn_pg, $sql_query_acc, [$account_uuid]);
 	if (pg_num_rows($query_account) == 0) {
 	file_put_contents("/var/www/html/webhook-data.log",print_r($sql,true), FILE_APPEND);
 //	$sql_ins = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES('". $account_uuid ."', '" .  $prov_domain .  "', true , '". $request_data_account['name'] ."');";
@@ -315,7 +269,7 @@ foreach ($settings_to_insert as $set) {
 //	$sql = "UPDATE public.v_domains SET domain_name='" . $prov_domain . "', domain_description='". $request_data_account['name'] ."' WHERE domain_uuid='" . $account_uuid .   "';"; 
         $sql = "UPDATE public.v_domains SET domain_name = $1, domain_description = $2 WHERE domain_uuid = $3;";     
         
-	safe_sql_exec($conn_pg, $sql, [$prov_domain,$request_data_account['name'],$account_uuid]);
+	safe_sql_exec($conn_pg, $sql, [$prov_domain,$request_data_account['name']],$account_uuid);
         
         }
 
@@ -433,7 +387,6 @@ switch($brand){
 	$res_check = safe_sql_exec($conn_pg, $sql_settings_prov_check, [$account_uuid, 'provision', 'enabled']);
 	file_put_contents("/var/www/html/webhook-data.log",$sql_settings_check, FILE_APPEND);
 
-        /*
 	if (pg_num_rows($res_check) == 0) {
 $sql_insert_setting = "INSERT INTO public.v_domain_settings 
     (domain_uuid, domain_setting_uuid, domain_setting_category, domain_setting_subcategory, domain_setting_name, domain_setting_value, domain_setting_order, domain_setting_enabled, domain_setting_description) 
@@ -472,7 +425,7 @@ foreach ($settings_to_insert as $set) {
     
     safe_sql_exec($conn_pg, $sql_insert_setting, $params);
 }
-        */
+        
 
 	
         
