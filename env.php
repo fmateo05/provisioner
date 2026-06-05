@@ -7,7 +7,8 @@ $couch_port = '15984';
 
 $user = 'fusionpbx';
 $password = '';
-$host =':5432';
+$host ='host';
+$port = '5432';
 $database ='fusionpbx';
 
 
