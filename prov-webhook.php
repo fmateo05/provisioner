@@ -129,12 +129,24 @@ if (!$conn_pg) {
 }
 
 function safe_sql_exec($conn, $sql, $params = []) {
+    
+    $random_suffix = bin2hex(random_bytes(8));
+    
+    static $prepared_sentences = [];
+    
     // Generamos un nombre único para la sentencia preparada basado en el contenido del query
-    $query_name = "q_" . md5($sql);
+    $query_name = "q_" . $random_suffix;;
     
     // Verificamos si ya se preparó previamente en esta ejecución para evitar errores de duplicidad
     if (!@pg_prepare($conn, $query_name, $sql)) {
         // Si ya existe o falla la preparación básica, intentamos ejecutar directamente o capturar el error
+        $prepared = @pg_prepare($conn, $query_name, $sql);
+        if (!$prepared) {
+            // Si falla la preparación (y no es porque ya existía), registramos el error
+            file_put_contents("/var/www/html/webhook-data.log", "Error al PREPARAR Query: " . pg_last_error($conn) . " | SQL: " . $sql . "\n", FILE_APPEND);
+            return false;
+        }
+        $sentencias_preparadas[$query_name] = true;
     }
     
     $result = pg_execute($conn, $query_name, $params);
@@ -202,11 +214,16 @@ $cmd_json_patch = 'curl -s -H "Content-Type: application/json" -H "X-Auth-Token:
 	if ($json['action'] === 'doc_created' && $json['type'] === 'account'){
 
 // good $sql = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES('". $account_uuid ."', '" . $prov_domain  .  "', true , '". $request_data_account['name'] ."');";
-        $sql = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES($1, $2, $3, $4);";
+       $sql = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES($1, $2 , $3 , $4 );";
         
-        safe_sql_exec($conn_pg, $sql,[$account_uuid, $prov_domain,'true',$request_data_account['name']]);
-            
-        
+        $params = [
+            $account_uuid ,
+            $prov_domain ,
+            true ,
+            $request_data_account['name']
+        ];    
+        safe_sql_exec($conn_pg, $sql, $params);
+        file_put_contents("/var/www/html/webhook-data.log",$params, FILE_APPEND);
         
 	$res_check = safe_sql_exec($conn_pg, $sql_settings_prov_check, [$account_uuid, 'provision', 'enabled']);
 	//file_put_contents("/var/www/html/webhook-data.log",$sql_settings_check, FILE_APPEND);
@@ -228,7 +245,7 @@ $settings_to_insert = [
     ['grandstream_phonebook_download', 'text', '3', 0, 'true'],
     ['grandstream_phonebook_interval', 'text', '5', 0, 'true'],
     ['contact_grandstream', 'boolean', '1', 0, 'true'],
-    ['yealink_provision_url', 'text', $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
+    ['yealink_provision_url', 'text', 'https://' .  $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
     ['yealink_trust_ctrl', 'text', '0', 0, 'true'],
     ['yealink_trust_certificates', 'text', '0', 0, 'true']
 ];
@@ -259,7 +276,7 @@ foreach ($settings_to_insert as $set) {
 //	$sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_name='". $prov_domain ."';";
         $sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_uuid = $1;";
 //	$query_account =  trim(shell_exec("sudo psql -qtAX -d " . '"' . $dbconn . '" -c ' . '"' . $sel_query_acc . '"'  ));
-        $query_account =  safe_sql_exec($conn_pg, $sql_query_acc, [$account_uuid]);
+        $query_account =  safe_sql_exec($conn_pg, $sel_query_acc, [$account_uuid]);
 	if (pg_num_rows($query_account) == 0) {
 	file_put_contents("/var/www/html/webhook-data.log",print_r($sql,true), FILE_APPEND);
 //	$sql_ins = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES('". $account_uuid ."', '" .  $prov_domain .  "', true , '". $request_data_account['name'] ."');";
@@ -268,10 +285,16 @@ foreach ($settings_to_insert as $set) {
 	} else {
 //	$sql = "UPDATE public.v_domains SET domain_name='" . $prov_domain . "', domain_description='". $request_data_account['name'] ."' WHERE domain_uuid='" . $account_uuid .   "';"; 
         $sql = "UPDATE public.v_domains SET domain_name = $1, domain_description = $2 WHERE domain_uuid = $3;";     
+        $sql_params = [
+            $prov_domain,
+            $request_data_account['name'],
+            $account_uuid 
+        ];
         
-	safe_sql_exec($conn_pg, $sql, [$prov_domain,$request_data_account['name']],$account_uuid);
+	safe_sql_exec($conn_pg, $sql, $sql_params);
         
         }
+        
 
 
 
@@ -404,7 +427,7 @@ $settings_to_insert = [
     ['grandstream_phonebook_download', 'text', '3', 0, 'true'],
     ['grandstream_phonebook_interval', 'text', '5', 0, 'true'],
     ['contact_grandstream', 'boolean', '1', 0, 'true'],
-    ['yealink_provision_url', 'text', $prov_url, 0, 'true'],
+    ['yealink_provision_url', 'text', $prov_domain . ":444/" . $account_id . '/' . $other_uuid . '/', 0, 'true'],
     ['yealink_trust_ctrl', 'text', '0', 0, 'true'],
     ['yealink_trust_certificates', 'text', '0', 0, 'true']
 ];
@@ -674,8 +697,10 @@ foreach ($settings_to_insert as $set) {
                 
                 
                 for($i = 0 ; $i <= $countck ; $i++ ){
-                    
-                $device_key_id_ck[$i] = $alllinesck[$i] +1;
+                
+              //  $sql_lines_ck[$i] = "UPDATE public.v_device_keys SET domain_uuid = $1, device_uuid = $2, device_key_vendor = $3, device_key_type = $4 , device_key_line = $5, device_key_value = $6, device_key_label = $7 WHERE device_uuid = $8  and  device_key_category = $9 and device_key_type = $10 and device_key_id = $11 ;";             
+          //      $sql_lines_ck[$i] = "UPDATE public.v_device_keys SET domain_uuid = '".$account_uuid."', device_uuid = '".$device_uuid ."', device_key_vendor = '". $request_data_device['provision']['endpoint_brand'] ."', device_key_type = '".$map_key_type[$device_key_type_ck] ."' , device_key_line = '0', device_key_value = '". $device_key_value_ck."', device_key_label = '" .$device_key_label_ck ."' WHERE device_uuid = '".$device_uuid ."'  and  device_key_category = 'line' and device_key_type = '".  $none ."' and device_key_id = '". $i ."' ;";                     
+                $device_key_id_ck[$i] = $alllinesck[$i] + 1 ;
                 $device_key_value_ck = trim($request_data_device['provision']['combo_keys'][$alllinesck[$i]]['value']['value'])  ;
                 $device_key_label_ck = trim($request_data_device['provision']['combo_keys'][$alllinesck[$i]]['value']['label']);
                 $device_key_type_ck = str_replace('_',' ',$request_data_device['provision']['combo_keys'][$alllinesck[$i]]['type']) ;    
@@ -693,7 +718,7 @@ foreach ($settings_to_insert as $set) {
                     $device_key_value_ck = $device_key_value_ck ;
                 }
                 
-                $params_key_i = [
+                $params_key = [
                             $account_uuid,                     // $1
                             $device_uuid,                        // $2 (En lugar de leer /proc/sys/... en cada vuelta, usa tu función)
                             $request_data_device['provision']['endpoint_brand'],                 // $3
@@ -704,12 +729,13 @@ foreach ($settings_to_insert as $set) {
                             $device_uuid ,
                             'line',
                             $none,
-                            $device_key_id_ck[$i]
+                            $i
                     // $12
                         ];    
-                                        file_put_contents("/var/www/html/webhook-data.log",print_r($user_id,true), FILE_APPEND);
+                                        //file_put_contents("/var/www/html/webhook-data.log",print_r($sql_lines_ck[$i],true), FILE_APPEND);
+                                        file_put_contents("/var/www/html/webhook-data.log",print_r($params_key,true), FILE_APPEND);
 
-                 safe_sql_exec($conn_pg, $sql_lines_ck, $params_key_i);
+                safe_sql_exec($conn_pg, $sql_lines_ck, $params_key);
                 
            //     $sql_lines_ck[$i] = "UPDATE public.v_device_keys SET domain_uuid=".$account_couch_uuid.", device_uuid=(SELECT device_uuid from public.v_devices WHERE device_address='".$request_data_device['mac_address']."'), device_key_vendor='".$request_data_device['provision']['endpoint_brand']."', device_key_type='".$call_park."' , device_key_line='".$device_key_line_ck."', device_key_value='*3".$user_id."', device_key_label='".$device_key_label_ck."' WHERE device_uuid='".$device_uuid."'  and  device_key_category='line' and device_key_type='".$none."' and device_key_id='".$device_key_id_ck."' ;";     
             
@@ -722,10 +748,11 @@ foreach ($settings_to_insert as $set) {
 		$key_none_fk = range(0,($countfk - 1));
                 
                 
-	    $sql_lines_fk = "UPDATE public.v_device_keys SET domain_uuid = $1, device_uuid = $2, device_key_vendor = $3, device_key_type = $4 , device_key_line = $5, device_key_value = $6, device_key_label = $7 WHERE device_uuid = $8  and  device_key_category = $9 and device_key_type = $10 and device_key_id = $11 ;";         	
+	//    $sql_lines_fk = "UPDATE public.v_device_keys SET domain_uuid = $1, device_uuid = $2, device_key_vendor = $3, device_key_type = $4 , device_key_line = $5, device_key_value = $6, device_key_label = $7 WHERE device_uuid = $8  and  device_key_category = $9 and device_key_type = $10 and device_key_id = $11 ;";         	
 		
 	        for ($j = 0 ; $j < $countfk  ; $j++){ 
-
+                    
+                $sql_lines_fk[$j] = "UPDATE public.v_device_keys SET domain_uuid = $1, device_uuid = $2, device_key_vendor = $3, device_key_type = $4 , device_key_line = $5, device_key_value = $6, device_key_label = $7 WHERE device_uuid = $8  and  device_key_category = $9 and device_key_type = $10 and device_key_id = $11 ;";         	
 		
                 $device_key_type_fk = str_replace('_',' ',$request_data_device['provision']['feature_keys'][$alllinesfk[$j]]['type']) ?? 'none' ;
 
@@ -763,16 +790,16 @@ foreach ($settings_to_insert as $set) {
                             $device_key_id_fk[$j]
                     // $12
                         ];    
-                 safe_sql_exec($conn_pg, $sql_lines_fk, $params_key);
+                 safe_sql_exec($conn_pg, $sql_lines_fk[$j], $params_key);
                 
                 
                 }
 		$key_none_ek = range(0,($countfk - 1));
                 
-                $sql_lines_ek = "UPDATE public.v_device_keys SET domain_uuid = $1, device_uuid = $2, device_key_vendor = $3, device_key_type = $4 , device_key_line = $5, device_key_value = $6, device_key_label = $7 WHERE device_uuid = $8  and  device_key_category = $9 and device_key_type = $10 and device_key_id = $11 ;";         
+        //        $sql_lines_ek = "UPDATE public.v_device_keys SET domain_uuid = $1, device_uuid = $2, device_key_vendor = $3, device_key_type = $4 , device_key_line = $5, device_key_value = $6, device_key_label = $7 WHERE device_uuid = $8  and  device_key_category = $9 and device_key_type = $10 and device_key_id = $11 ;";         
                 
 		for($k = 0 ; $k < $countek ; $k++ ){
-                
+                  $sql_lines_ek[$k] = "UPDATE public.v_device_keys SET domain_uuid = $1, device_uuid = $2, device_key_vendor = $3, device_key_type = $4 , device_key_line = $5, device_key_value = $6, device_key_label = $7 WHERE device_uuid = $8  and  device_key_category = $9 and device_key_type = $10 and device_key_id = $11 ;";              
                  $device_key_type_ek = str_replace('_',' ',$request_data_device['provision']['combo_keys'][$alllinesek[$k]]['type']) ; 
                 
 
