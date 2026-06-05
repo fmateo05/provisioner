@@ -703,7 +703,7 @@ foreach ($settings_to_insert as $set) {
                             $device_key_label_ck ,
                             $device_uuid ,
                             'line',
-                            'none',
+                            $none,
                             $device_key_id_ck[$i]
                     // $12
                         ];    
@@ -759,7 +759,7 @@ foreach ($settings_to_insert as $set) {
                             $device_key_label_fk ,
                             $device_uuid ,
                             'memory',
-                            'none',
+                            $none,
                             $device_key_id_fk[$j]
                     // $12
                         ];    
@@ -808,7 +808,7 @@ foreach ($settings_to_insert as $set) {
                             $device_key_label_ek ,
                             $device_uuid ,
                             'expansion',
-                            'none',
+                            $none,
                             $device_key_id_ek
                     // $12
                         ];    
