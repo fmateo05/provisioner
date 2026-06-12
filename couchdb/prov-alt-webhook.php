@@ -663,7 +663,7 @@ foreach ($settings_to_insert as $set) {
                             $device_uuid ,
                             'line',
                             $none,
-                            $i
+                            $device_key_id_ck[$i]
                     // $12
                         ];
                                         //file_put_contents("/var/www/html/webhook-data.log",print_r($sql_lines_ck[$i],true), FILE_APPEND);
