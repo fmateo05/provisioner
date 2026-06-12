@@ -1,5 +1,6 @@
 <?php
-
+ini_set('display_errors', '0');
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
 
 function _get_account_db($account_id) {
@@ -9,13 +10,9 @@ function _get_account_db($account_id) {
 function device_value_user($device_key_value,$account_db,$conn){
 
 
+$result_user['presence_id'] = $request_data_device['presence_id'] ?: '100' ;
 
-/
-$users = $device_key_value;
 
-$command_user = "curl -s ". $conn . '/'  . $account_db . '/' . $users . '| python3 -mjson.tool' ;
-$document_user = shell_exec($command_user);
-$result_user = json_decode($document_user,true);
 //file_put_contents('/var/www/html/webhook-data.log',print_r($command_user,true));
 
 return $result_user['presence_id'];
@@ -63,8 +60,8 @@ $command_acc = "curl -s ". $conn . '/'  . $account_db . '/' . $account . '| pyth
 $result_acc[] = [] ; //json_decode($document_acc,true);
 
 
-$request_data_account  = $result_acc;
-$request_data_user  = $result_user;
+$request_data_account  = $row_doc;
+$request_data_user  = $row_doc ;
 $request_data_device  = $row_doc;
 
 $other_uuid = trim(file_get_contents('/proc/sys/kernel/random/uuid'));
@@ -81,10 +78,10 @@ $account_uuid = preg_replace("/(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})/i", "$1-$2-$
 //$dbconn = "postgres://" . $user . ":" . $password . "@" . $host . "/" . $database . "?sslmode=require" ;
 
 // En lugar de tu variable $dbconn actual, creamos la conexión nativa:
-$host = '';
+$host = '<fusionpbx-host>';
 $database = 'fusionpbx';
 $user = 'fusionpbx';
-$password = '';
+$password = '<fusion-db-password>';
 
 
 $dbconn = "host=$host dbname=$database user=$user password=$password sslmode=require";
@@ -96,7 +93,7 @@ if (!$conn_pg) {
 }
 
 $prov_domain =  str_replace('sip','prov',$request_data_account['realm']) ;
-$sip_domain =  str_replace('prov','sip',$prov_domain) ;
+$sip_domain =  $request_data_device['sip']['realm'] ;
 
 $auth_doc = '{
   "data": {
@@ -159,7 +156,37 @@ $cmd_json_patch = 'curl -s -H "Content-Type: application/json" -H "X-Auth-Token:
         safe_sql_exec($conn_pg, $sql, $params);
         file_put_contents("/var/www/html/webhook-data.log",$params, FILE_APPEND);
 
-	$res_check = safe_sql_exec($conn_pg, $sql_settings_prov_check, [$account_uuid, 'provision', 'enabled']);
+	
+
+
+//	shell_exec("sudo psql -d " . '"' . $dbconn . '" -c ' . '"' . $sql . '"'  );
+
+	} else if ($json['action'] === 'doc_edited'&& $json['type'] === 'account'){
+//	$sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_name='". $prov_domain ."';";
+        $sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_uuid = $1;";
+//	$query_account =  trim(shell_exec("sudo psql -qtAX -d " . '"' . $dbconn . '" -c ' . '"' . $sel_query_acc . '"'  ));
+        $query_account =  safe_sql_exec($conn_pg, $sel_query_acc, [$account_uuid]);
+	if (pg_num_rows($query_account) == 0) {
+	file_put_contents("/var/www/html/webhook-data.log",print_r($sql,true), FILE_APPEND);
+//	$sql_ins = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES('". $account_uuid ."', '" .  $prov_domain .  "', true , '". $request_data_account['name'] ."');";
+        $sql_ins = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES($1, $2 , $3 , $4 );";
+        safe_sql_exec($conn_pg, $sql_ins, [$account_uuid, $prov_domain,true,$request_data_account['name']]);
+	} else {
+//	$sql = "UPDATE public.v_domains SET domain_name='" . $prov_domain . "', domain_description='". $request_data_account['name'] ."' WHERE domain_uuid='" . $account_uuid .   "';";
+        $sql = "UPDATE public.v_domains SET domain_name = $1, domain_description = $2 WHERE domain_uuid = $3;";
+        $sql_params = [
+            $prov_domain,
+            $request_data_account['name'],
+            $account_uuid
+        ];
+
+	safe_sql_exec($conn_pg, $sql, $sql_params);
+        
+        
+
+        }
+        
+        $res_check = safe_sql_exec($conn_pg, $sql_settings_prov_check, [$account_uuid, 'provision', 'enabled']);
 	//file_put_contents("/var/www/html/webhook-data.log",$sql_settings_check, FILE_APPEND);
 
 	if (pg_num_rows($res_check) == 0) {
@@ -203,33 +230,7 @@ foreach ($settings_to_insert as $set) {
 
 	}
 
-
-//	shell_exec("sudo psql -d " . '"' . $dbconn . '" -c ' . '"' . $sql . '"'  );
-
-	} else if ($json['action'] === 'doc_edited'&& $json['type'] === 'account'){
-//	$sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_name='". $prov_domain ."';";
-        $sel_query_acc = "SELECT domain_uuid from public.v_domains WHERE domain_uuid = $1;";
-//	$query_account =  trim(shell_exec("sudo psql -qtAX -d " . '"' . $dbconn . '" -c ' . '"' . $sel_query_acc . '"'  ));
-        $query_account =  safe_sql_exec($conn_pg, $sel_query_acc, [$account_uuid]);
-	if (pg_num_rows($query_account) == 0) {
-	file_put_contents("/var/www/html/webhook-data.log",print_r($sql,true), FILE_APPEND);
-//	$sql_ins = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES('". $account_uuid ."', '" .  $prov_domain .  "', true , '". $request_data_account['name'] ."');";
-        $sql_ins = "INSERT INTO public.v_domains (domain_uuid, domain_name, domain_enabled, domain_description) VALUES($1, $2 , $3 , $4 );";
-        safe_sql_exec($conn_pg, $sql_ins, [$account_uuid, $prov_domain,true,$request_data_account['name']]);
-	} else {
-//	$sql = "UPDATE public.v_domains SET domain_name='" . $prov_domain . "', domain_description='". $request_data_account['name'] ."' WHERE domain_uuid='" . $account_uuid .   "';";
-        $sql = "UPDATE public.v_domains SET domain_name = $1, domain_description = $2 WHERE domain_uuid = $3;";
-        $sql_params = [
-            $prov_domain,
-            $request_data_account['name'],
-            $account_uuid
-        ];
-
-	safe_sql_exec($conn_pg, $sql, $sql_params);
-
-        }
-
-
+        
 
 
 
@@ -445,7 +446,7 @@ foreach ($settings_to_insert as $set) {
 
 
 	        } else if(pg_num_rows($query_devices) !== 0 && pg_num_rows($query_lines) !== 0){
-                $user_id = device_value_user($request_data_device['owner_id'], $account_db,$conn);
+                $user_id = $request_data_device['presence_id'];
 	   //    $sql = "UPDATE public.v_devices SET domain_uuid=".$account_uuid.", device_address='".$mac_address."', device_label='".$user_id ."', device_vendor='". $request_data_device['provision']['endpoint_brand'] ."', device_model='".$modelup ."', device_enabled=true, device_template='".$request_data_device['provision']['endpoint_brand'] . "/" . $modelup  ."', device_username='".$request_data_device['sip']['username']."', device_password='".$request_data_device['sip']['password']."' WHERE device_uuid='".$device_uuid ."' AND device_address='". $mac_address . "';";
 	 	 $sql = "UPDATE public.v_devices SET domain_uuid = $1 , device_address = $2, device_label = $3, device_vendor = $4, device_model = $5, device_enabled = $6, device_template = $7 , device_username = $8 , device_password = $9 WHERE device_uuid = $10  AND device_address = $11 ;";
                  $sql_params =
@@ -642,11 +643,11 @@ foreach ($settings_to_insert as $set) {
                 if($device_key_type_ck === 'parking'){
                     $device_key_value_ck = '*3' . $device_key_value_ck ;
                 } else if($device_key_type_ck === 'personal parking'){
-                    $user_id = device_value_user($device_key_value_ck, $account_db, $conn);
+                    $user_id = $request_data_device['presence_id'];
                     $device_key_value_ck = '*3' . $user_id ;
 
                 } else if($device_key_type_ck === 'presence'){
-                    $user_id = device_value_user($device_key_value_ck, $account_db, $conn);
+                    $user_id = $request_data_device['presence_id'];
                     $device_key_value_ck = $user_id ;
                 } else {
                     $device_key_value_ck = $device_key_value_ck ;
@@ -701,10 +702,10 @@ foreach ($settings_to_insert as $set) {
                 if($device_key_type_fk === 'parking'){
                     $device_key_value_fk = '*3' . $device_key_value_fk ;
                 } else if ($device_key_type_fk === 'personal parking') {
-                    $user_id = device_value_user($device_key_value_fk, $account_db, $conn);
+                    $user_id = $request_data_device['presence_id'];
                     $device_key_value_fk = '*3' . $user_id ;
                 } else if($device_key_type_fk === 'presence'){
-                    $user_id = device_value_user($device_key_value_fk, $account_db, $conn);
+                    $user_id = $request_data_device['presence_id'];
                     $device_key_value_fk = $user_id ;
                 } else {
                     $device_key_value_fk = $device_key_value_fk ;
@@ -750,10 +751,10 @@ foreach ($settings_to_insert as $set) {
                     $device_key_value_ek = '*3' . $device_key_value_ek ;
 
                 } else if ($device_key_type_ek === 'personal parking') {
-                    $user_id = device_value_user($device_key_value_ek, $account_db, $conn);
+                    $user_id = $request_data_device['presence_id'];
                     $device_key_value_ek = '*3' . $user_id ;
                 } else if($device_key_type_ek === 'presence'){
-                    $user_id = device_value_user($device_key_value_ek, $account_db, $conn);
+                    $user_id = $request_data_device['presence_id'];
                     $device_key_value_ek = $user_id ;
                 } else {
                     $device_key_value_ek = $device_key_value_ek ;
