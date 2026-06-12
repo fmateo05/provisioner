@@ -1,12 +1,16 @@
 <?php
 // Forzar salida en tiempo real en la terminal
-ob_implicit_flush(true);
-while (ob_get_level()) ob_end_clean();
+//ob_implicit_flush(true);
+//while (ob_get_level()) ob_end_clean();
+ini_set('display_errors', '0');
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
 // 1. Configuración de tu JSON
 $couch_url  = "http://cdb01.lxd.kazoo.io:5984";
 $couch_user = "kazoo";
 $couch_pass = "kazookazoo01";
+
+require_once('/var/www/prov-alt-webhook.php');
 
 echo "[*] Iniciando Escucha por '_db_updates' (Filtro estricto de Cuentas)...\n";
 
@@ -96,22 +100,7 @@ function verificar_y_procesar_cuenta($url, $user, $pass, $db_name, $account_id) 
             echo "        [-] Nombre: {$account_name}\n";
             echo "        [-] Realm SIP: {$realm}\n";
             
-             $payload_account = '{
-                "id": "'. $account_id .'",
-                "account_id": "'.$account_id .'",
-                "action": "doc_edited",
-                "type": "account",
-                "cluster_id": "'. $account_id .'"
-                        }';
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, "http://127.0.0.1/prov-webhook.php");
-                curl_setopt($ch, CURLOPT_POST, true);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload_account);
-                curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-                curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/json '));
-                $output_account=curl_exec($ch);
-                curl_close($ch);
+             provisioner('doc_edited','account',$account_id,$account_id,$doc);
 
             
             // AQUÍ ejecutas la lógica de tu provisionador para actualizar rutas/dominios globales
