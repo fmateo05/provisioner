@@ -1,14 +1,13 @@
 <?php
-// Forzar salida en tiempo real en la terminal
-ob_implicit_flush(true);
-while (ob_get_level()) ob_end_clean();
 
-require_once('/var/www/prov-alt-webhook.php');
+
+require_once('/var/www/env.php');
+require_once('/opt/provisioner/prov-alt-webhook.php');
 
 // 1. Configuración de tu JSON
-$couch_url  = "http://couch-url:5984";
-$couch_user = "user";
-$couch_pass = "password";
+$couch_url  = "http://couchdb-server:5984";
+$couch_user = "<user>";
+$couch_pass = "<pass>";
 
 echo "[*] Iniciando Escucha por '_db_updates' (Filtro estricto de DISPOSITIVOS)...\n";
 
@@ -95,6 +94,10 @@ function buscar_dispositivos_modificados($url, $user, $pass, $db_name, $account_
                         $is_deleted = isset($doc['pvt_deleted']) && $doc['pvt_deleted'] === true;
                         $device_name = isset($doc['name']) ? $doc['name'] : 'Dispositivo sin nombre';
                         $mac_address = isset($doc['mac_address']) ? $doc['mac_address'] : 'Sin MAC';
+                        $owner_id = isset($doc['owner_id']) ? $doc['owner_id']: $doc_id;
+                        
+                        
+                       $alllinesck = array_values(array_keys($doc['provision']['combo_keys']))  ;
                         
                         // Control de cooldown para no duplicar la escritura del archivo de aprovisionamiento
                         $cache_key = $account_id . "_" . $doc_id;
@@ -121,19 +124,31 @@ function buscar_dispositivos_modificados($url, $user, $pass, $db_name, $account_
                             // Inyectamos el Realm directamente dentro del array del documento del dispositivo
                             $doc['sip']['realm'] = $realm_cuenta;
                             
+                            // $combo_keys = procesar_cambio_presence_dispositivo($url, $db_name, $user, $pass, $doc);        
+                             
                             // Extraer Extensión / Presence ID desde los callflows de la cuenta
-                            $extension = obtener_extension_dispositivo($url, $user, $pass, $db_name, $doc_id);
-                            
-                            // Inyectamos la extensión en el payload del dispositivo
-                            $doc['sip']['extension'] = $extension;
-                            
+                           // Original $extension = obtener_extension_dispositivo($url, $user, $pass, $db_name, $doc_id);
+                            // $extension = obtener_extension_dispositivo($url, $user, $pass, $db_name, $owner_id);
+                             
+                            $doc_updated = procesar_cambio_presence_dispositivo($url, $db_name, $user, $pass, $doc);        
+                             unset($doc_updated['provision']['id']);
+                           // $doc['sip']['extension'] = $extension;
+                           
+                          
                             // Si el dispositivo no tiene un presence_id explícito, usamos la extensión como presence_id estándar
-                            if (empty($doc['presence_id'])) {
-                               $doc['presence_id'] = $extension;
-                            }
+//                            if (empty($doc['presence_id'])) {
+//                               $doc['presence_id'] = $extension;
+//                            }
+//                          
+                           
+                                
+                           // print_r($doc_updated);
+                            // Inyectamos la extensión en el payload del dispositivo
+                            
                             
                             echo "    [*] Estado: Creado o Modificado. Regenerando plantilla...\n";
-                            procesar_cambio_dispositivo($account_id, $doc_id, $doc);
+                            print_r($doc_updated['provision']);
+                            procesar_cambio_dispositivo($account_id, $doc_id, $doc_updated);
                         }
                     }
                 }
@@ -163,43 +178,100 @@ function obtener_realm_de_cuenta($url, $user, $pass, $db_name, $account_id) {
 }
 
 // --- FUNCIÓN PARA BUSCAR LA EXTENSIÓN (CALLFLOW) ---
-function obtener_extension_dispositivo($url, $user, $pass, $db_name, $device_id) {
-    // Consultamos la vista de diseño nativa de Kazoo para listar callflows rápidamente
-    // Si tu CouchDB no tiene esta vista indexada, puedes usar un filtro plano de documentos
-    $callflows_url = "{$url}/" . urlencode($db_name) . "/_all_docs?include_docs=true";
+function obtener_extension_dispositivo($url, $user, $pass, $db_name, $owner_id) {
+// Apuntamos directamente al documento del usuario dentro de la BD de la cuenta
+    $user_doc_url = "{$url}/" . urlencode($db_name) . "/" . urlencode($owner_id);
     
-    $ch = curl_init($callflows_url);
+    $ch = curl_init($user_doc_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     if ($user !== '-') curl_setopt($ch, CURLOPT_USERPWD, "{$user}:{$pass}");
     
     $res = curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
     
-    if ($res) {
-        $all_docs = json_decode($res, true);
-        if (isset($all_docs['rows'])) {
-            foreach ($all_docs['rows'] as $row) {
-                $doc = isset($row['doc']) ? $row['doc'] : [];
-                
-                // Buscamos documentos que sean de tipo 'callflow'
-                if (isset($doc['pvt_type']) && $doc['pvt_type'] === 'callflow') {
-                    
-                    // Verificamos si este callflow apunta a nuestro dispositivo actual en sus reglas de marcado
-                    $flow_json = json_encode($doc['flow']);
-                    if (strpos($flow_json, $device_id) !== false) {
-                        
-                        // Extraemos el número asignado (normalmente el primer elemento del array 'numbers')
-                        if (!empty($doc['numbers'][0])) {
-                            return $doc['numbers'][0];
-                        }
-                    }
-                }
+    if ($http_code === 200 && $res) {
+        $user_doc = json_decode($res, true);
+        
+        // Confirmamos que sea un documento de tipo usuario y extraemos su presence_id nativo
+        if (isset($user_doc['pvt_type']) && $user_doc['pvt_type'] === 'user') {
+            if (!empty($user_doc['presence_id'])) {
+                echo "        [✔] Presence ID encontrado en el usuario: " . $user_doc['presence_id'] . "\n";
+                return (string)$user_doc['presence_id'];
             }
         }
     }
-    
-    return "100"; // Extensión de respaldo por defecto si el teléfono no está mapeado a un flujo
+    return null;
 }
+function procesar_cambio_presence_dispositivo($url, $db_name, $user, $pass,  $device_data) {
+    
+
+    // 1. Extraer los datos base que ya calculamos
+    $username    = isset($device_data['sip']['username']) ? $device_data['sip']['username'] : 'sin_user';
+    $realm       = isset($device_data['sip']['realm']) ? $device_data['sip']['realm'] : 'sin_realm';
+    $extension   = isset($device_data['sip']['extension']) ? $device_data['sip']['extension'] : '100';
+  //  $presence_id = isset($device_data['presence_id']) ? $device_data['presence_id'] : $extension;
+  //  $presence_id = obtener_extension_dispositivo($url, $user, $pass, $db_name, $owner_id);
+    $mac         = isset($device_data['mac_address']) ? $device_data['mac_address'] : '000000000000';
+
+  //  print_r($device_data['provision']['combo_keys']);
+    
+    echo "    [*] Analizando estructura de botones (Combo Keys) para la MAC: {$mac}...\n";
+    
+    // 2. Identificar dónde guarda Kazoo las teclas (suele ser en $device_data['combo_keys'])
+    // Si tu versión o frontend lo maneja en un nodo plano, nos aseguramos con una condicional
+    $keys_path = false;
+    if (isset($device_data['provision']['combo_keys'])) {
+        $keys_path = 'combo_keys';
+    } else if (isset($device_data['provision']['feature_keys'])) {
+        $keys_path = 'feature_keys';
+    } elseif (isset($device_data['keys'])) {
+        $keys_path = 'keys';
+    }
+
+    if ($keys_path !== false && is_array($device_data['provision'][$keys_path])) {
+        
+        // Recorremos cada botón programado en el teléfono
+        foreach ($device_data['provision'][$keys_path] as $key_index => $key_properties) {
+            
+            // Verificamos si el botón tiene una propiedad 'type' o 'function'
+            $key_type = isset($key_properties['type']) ? $key_properties['type'] : '';
+            
+            // FILTRO DE BOTONES: Evaluamos si es una tecla de presencia o de parqueo personal
+            if ($key_type === 'presence' || $key_type === 'personal_parking' || $key_type === 'personal parking') {
+                
+                echo "        [→] Botón programado encontrado en la posición [{$key_index}] de tipo: '{$key_type}'\n";
+                
+                // Sobreescribimos el valor antiguo por el presence_id limpio calculado por Owner ID
+               // $device_data[$keys_path][$key_index]['value'] = $presence_id;
+                
+                $presence_owner_id = $device_data['provision'][$keys_path][$key_index]['value']['value'] ;
+                $presence_id = obtener_extension_dispositivo($url, $user, $pass, $db_name, $presence_owner_id);
+                 $device_data['provision'][$keys_path][$key_index]['value']['value'] = (string)$presence_id;
+                 // Opcional: Si el teléfono requiere el formato completo extension@realm para el BLF:
+                // $device_data[$keys_path][$key_index]['value'] = $presence_id . "@" . $realm;
+               
+                echo "            [✔] Valor de la tecla actualizado exitosamente a: " . $device_data['provision'][$keys_path][$key_index]['value']['value'] . "\n";
+                
+            }
+        }
+    } else {
+        echo "        [i] Este dispositivo no tiene botones (Combo Keys) configurados en Monster UI.\n";
+    }
+
+    // 3. AQUÍ PROCEDES A COMPILAR TU PLANTILLA FISICA
+    // El array '$device_data' ahora tiene los botones modificados en caliente.
+    // Puedes pasar este array corregido directamente a tu generador de archivos XML/CFG.
+    
+    // Ejemplo ficticio de escritura:
+    // $archivo_config = "/opt/provisioner/storage/" . $mac . ".cfg";
+    // compilar_y_guardar_template_yealink($archivo_config, $device_data);
+    
+    echo "    [OK] Proceso de transformación de botones finalizado.\n\n";
+    return $device_data;
+}
+
+
 
 // --- LÓGICA DE NEGOCIO PARA TU PROVISIONADOR ---
 
@@ -210,6 +282,8 @@ function procesar_cambio_dispositivo($account_id, $device_id, $device_data) {
     
     $username = isset($device_data['sip']['username']) ? $device_data['sip']['username'] : 'sin_user';
     provisioner('doc_edited','device',$account_id,$device_id,$device_data);
+    
+    
     echo "    [OK] Archivo de configuración actualizado para la extensión SIP: {$username}\n\n";
 }
 
