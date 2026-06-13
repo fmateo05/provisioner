@@ -147,7 +147,7 @@ function buscar_dispositivos_modificados($url, $user, $pass, $db_name, $account_
                             
                             
                             echo "    [*] Estado: Creado o Modificado. Regenerando plantilla...\n";
-                            print_r($doc_updated['provision']);
+                            
                             procesar_cambio_dispositivo($account_id, $doc_id, $doc_updated);
                         }
                     }
