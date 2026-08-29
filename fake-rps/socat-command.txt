@@ -1,0 +1,1 @@
+socat OPENSSL-LISTEN:443,cert=rpscert.pem,key=rpskey.pem,cafile=digicert-ca.crt,verify=0,cipher=ALL:@SECLEVEL=0,openssl-min-proto-version=TLS1,fork TCP:127.0.0.1:80
